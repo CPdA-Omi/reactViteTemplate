@@ -21,6 +21,15 @@ const pokemonList = [
   {name: 'weedle', imgSrc: imgURLTemplate + 13 + '.png'},
   {name: 'kakuna', imgSrc: imgURLTemplate + 14 + '.png'},
   {name: 'beedrill', imgSrc: imgURLTemplate + 15 + '.png'},
+  {name: 'pigdey', imgSrc: imgURLTemplate + 16 + '.png'},
+  {name: 'pidgeotto', imgSrc: imgURLTemplate + 17 + '.png'},
+  {name: 'pidgeot', imgSrc: imgURLTemplate + 18 + '.png'},
+  {name: 'rattata', imgSrc: imgURLTemplate + 19 + '.png'},
+  {name: 'raticate', imgSrc: imgURLTemplate + 20 + '.png'},
+  {name: 'spearow', imgSrc: imgURLTemplate + 21 + '.png'},
+  {name: 'fearow', imgSrc: imgURLTemplate + 22 + '.png'},
+  {name: 'ekans', imgSrc: imgURLTemplate + 23 + '.png'},
+  {name: 'arbok', imgSrc: imgURLTemplate + 24 + '.png'},
   {name: 'mew'},
 ];
 
@@ -40,9 +49,21 @@ function App() {
     }
   }
 
+  const handleClickIndex = (index) => {
+    if (pokemonIndex !== index){
+      setPokemonIndex(index);
+    }
+  }
+
   return (
     <>
-      <NavBar pokemonIndex={pokemonIndex} pokemonList={pokemonList} handleClickDecrement={handleClickDecrement} handleClickIncrement={handleClickIncrement}/>
+      <NavBar
+      pokemonIndex={pokemonIndex}
+      pokemonList={pokemonList}
+      handleClickDecrement={handleClickDecrement}
+      handleClickIncrement={handleClickIncrement}
+      handleClickIndex={handleClickIndex}
+      />
       <PokemonCard pokemon={pokemonList[pokemonIndex]}/>
     </>
   )

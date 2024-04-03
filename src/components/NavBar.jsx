@@ -1,16 +1,12 @@
-function NavBar({pokemonIndex, pokemonList, handleClickDecrement, handleClickIncrement}){
+function NavBar({pokemonIndex, pokemonList, handleClickDecrement, handleClickIncrement, handleClickIndex}){
 
 	return(
 		<div>
-			{pokemonIndex > 0 ?
-			<button onClick={handleClickDecrement}>Previous</button>
-			:
-			<button disabled>Previous</button>}
-
-			{pokemonIndex < pokemonList.length -1 ?
-			<button onClick={handleClickIncrement}>Next</button>
-			:
-			<button disabled>Next</button>}
+			{pokemonList.map((i) => (
+				<button key={i.name} onClick={() => handleClickIndex(pokemonList.indexOf(i))}>
+				{i.name.charAt(0).toUpperCase() + i.name.slice(1)}
+				</button>
+			))}
 		</div>
 	);
 }

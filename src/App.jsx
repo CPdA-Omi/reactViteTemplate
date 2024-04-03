@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 
 import PokemonCard from './components/PokemonCard.jsx'
+import NavBar from './components/NavBar.jsx'
+
 const imgURLTemplate = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 const pokemonList = [
   {name: 'bulbasaur', imgSrc: imgURLTemplate + 1 + '.png'},
@@ -13,6 +15,12 @@ const pokemonList = [
   {name: 'squirtle', imgSrc: imgURLTemplate + 7 + '.png'},
   {name: 'wartortle', imgSrc: imgURLTemplate + 8 + '.png'},
   {name: 'blastoise', imgSrc: imgURLTemplate + 9 + '.png'},
+  {name: 'caterpie', imgSrc: imgURLTemplate + 10 + '.png'},
+  {name: 'metapod', imgSrc: imgURLTemplate + 11 + '.png'},
+  {name: 'butterfree', imgSrc: imgURLTemplate + 12 + '.png'},
+  {name: 'weedle', imgSrc: imgURLTemplate + 13 + '.png'},
+  {name: 'kakuna', imgSrc: imgURLTemplate + 14 + '.png'},
+  {name: 'beedrill', imgSrc: imgURLTemplate + 15 + '.png'},
   {name: 'mew'},
 ];
 
@@ -34,17 +42,7 @@ function App() {
 
   return (
     <>
-      <div>
-        {pokemonIndex > 0 ?
-        <button onClick={handleClickDecrement}>Previous</button>
-        :
-        <button disabled>Previous</button>}
-        
-        {pokemonIndex < pokemonList.length -1 ?
-        <button onClick={handleClickIncrement}>Next</button>
-        :
-        <button disabled>Next</button>}
-      </div>
+      <NavBar pokemonIndex={pokemonIndex} pokemonList={pokemonList} handleClickDecrement={handleClickDecrement} handleClickIncrement={handleClickIncrement}/>
       <PokemonCard pokemon={pokemonList[pokemonIndex]}/>
     </>
   )

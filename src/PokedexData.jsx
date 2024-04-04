@@ -1,5 +1,6 @@
 const apiURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/"
 const mainImgURLTemplate = apiURL + "pokemon/other/official-artwork/"
+const spriteImgURLTemplate = apiURL + "pokemon/"
 const typeImgURLTemplate = apiURL + "types/generation-viii/legends-arceus/"
 const imgSuffixTemplate = ".png"
 
@@ -26,79 +27,104 @@ const pokemonTypes = [
 ];
 
 export const pokemonList = [
-  {name: 'missingNo.', types: ['flying', 'normal'], typesImgSrc: []},
-  {name: 'bulbasaur', types: ['grass', 'poison'], typesImgSrc: []},
-  {name: 'ivysaur', types: ['grass', 'poison'], typesImgSrc: []},
-  {name: 'venusaur', types: ['grass', 'poison'], typesImgSrc: []},
-  {name: 'charmender', types: ['fire'], typesImgSrc: []},
-  {name: 'charmeleon', types: ['fire'], typesImgSrc: []},
-  {name: 'charizard', types: ['fire', 'flying'], typesImgSrc: []},
-  {name: 'squirtle', types: ['water'], typesImgSrc: []},
-  {name: 'wartortle', types: ['water'], typesImgSrc: []},
-  {name: 'blastoise', types: ['water'], typesImgSrc: []},
-  {name: 'caterpie', types: ['bug'], typesImgSrc: []},
-  {name: 'metapod', types: ['bug'], typesImgSrc: []},
-  {name: 'butterfree', types: ['bug', 'flying'], typesImgSrc: []},
-  {name: 'weedle', types: ['bug', 'poison'], typesImgSrc: []},
-  {name: 'kakuna', types: ['bug', 'poison'], typesImgSrc: []},
-  {name: 'beedrill', types: ['bug', 'poison'], typesImgSrc: []},
-  {name: 'pigdey', types: ['normal', 'flying'], typesImgSrc: []},
-  {name: 'pidgeotto', types: ['normal', 'flying'], typesImgSrc: []},
-  {name: 'pidgeot', types: ['normal', 'flying'], typesImgSrc: []},
-  {name: 'rattata', types: ['normal'], typesImgSrc: []},
-  {name: 'raticate', types: ['normal'], typesImgSrc: []},
-  {name: 'spearow', types: ['normal', 'flying'], typesImgSrc: []},
-  {name: 'fearow', types: ['normal', 'flying'], typesImgSrc: []},
-  {name: 'ekans', types: ['poison'], typesImgSrc: []},
-  {name: 'arbok', types: ['poison'], typesImgSrc: []},
-  {name: 'pikachu', types: ['electric'], typesImgSrc: []},
-  {name: 'raichu', types: ['electric'], typesImgSrc: []},
-  {name: 'sandshrew', types: ['ground'], typesImgSrc: []},
-  {name: 'sandslash', types: ['ground'], typesImgSrc: []},
-  {name: 'nidoran ♀', types: ['poison'], typesImgSrc: []},
-  {name: 'nidorina', types: ['poison'], typesImgSrc: []},
-  {name: 'nidoqueen', types: ['poison', 'ground'], typesImgSrc: []},
-  {name: 'nidoran ♂', types: ['poison'], typesImgSrc: []},
-  {name: 'nidorino', types: ['poison'], typesImgSrc: []},
-  {name: 'nidoking', types: ['poison', 'ground'], typesImgSrc: []},
-  {name: 'clefairy', types: ['fairy'], typesImgSrc: []},
-  {name: 'clefable', types: ['fairy'], typesImgSrc: []},
-  {name: 'vulpix', types: ['fire'], typesImgSrc: []},
-  {name: 'ninetales', types: ['fire'], typesImgSrc: []},
-  {name: 'jigglypuff', types: ['normal', 'fairy'], typesImgSrc: []},
-  {name: 'wigglypuff', types: ['normal', 'fairy'], typesImgSrc: []},
-  {name: 'zubat', types: ['poison', 'flying'], typesImgSrc: []},
-  {name: 'golbat', types: ['poison', 'flying'], typesImgSrc: []},
-  {name: 'oddish', types: ['grass', 'poison'], typesImgSrc: []},
-  {name: 'gloom', types: ['grass', 'poison'], typesImgSrc: []},
-  {name: 'vileplume', types: ['grass', 'poison'], typesImgSrc: []},
-  {name: 'paras', types: ['bug', 'grass'], typesImgSrc: []},
-  {name: 'parasect', types: ['bug', 'grass'], typesImgSrc: []},
-  {name: 'venonat', types: ['bug', 'poison'], typesImgSrc: []},
-  {name: 'venomoth', types: ['bug', 'poison'], typesImgSrc: []},
-  {name: 'diglet', types: ['ground'], typesImgSrc: []},
-  {name: 'dugtrio', types: ['ground'], typesImgSrc: []},
-  {name: 'meowth', types: ['normal'], typesImgSrc: []},
-  {name: 'persian', types: ['normal'], typesImgSrc: []},
-  {name: 'psyduck', types: ['water'], typesImgSrc: []},
-  {name: 'golduck', types: ['water'], typesImgSrc: []},
-  {name: 'mankey', types: ['fighting'], typesImgSrc: []},
-  {name: 'primeape', types: ['fighting'], typesImgSrc: []},
-  {name: 'growlithe', types: ['fire'], typesImgSrc: []},
-  {name: 'arcanine', types: ['fire'], typesImgSrc: []},
+  {name: 'missingNo.', types: ['flying', 'normal']},
+  {name: 'bulbasaur', types: ['grass', 'poison']},
+  {name: 'ivysaur', types: ['grass', 'poison']},
+  {name: 'venusaur', types: ['grass', 'poison']},
+  {name: 'charmender', types: ['fire']},
+  {name: 'charmeleon', types: ['fire']},
+  {name: 'charizard', types: ['fire', 'flying']},
+  {name: 'squirtle', types: ['water']},
+  {name: 'wartortle', types: ['water']},
+  {name: 'blastoise', types: ['water']},
+  {name: 'caterpie', types: ['bug']},
+  {name: 'metapod', types: ['bug']},
+  {name: 'butterfree', types: ['bug', 'flying']},
+  {name: 'weedle', types: ['bug', 'poison']},
+  {name: 'kakuna', types: ['bug', 'poison']},
+  {name: 'beedrill', types: ['bug', 'poison']},
+  {name: 'pigdey', types: ['normal', 'flying']},
+  {name: 'pidgeotto', types: ['normal', 'flying']},
+  {name: 'pidgeot', types: ['normal', 'flying']},
+  {name: 'rattata', types: ['normal']},
+  {name: 'raticate', types: ['normal']},
+  {name: 'spearow', types: ['normal', 'flying']},
+  {name: 'fearow', types: ['normal', 'flying']},
+  {name: 'ekans', types: ['poison']},
+  {name: 'arbok', types: ['poison']},
+  {name: 'pikachu', types: ['electric']},
+  {name: 'raichu', types: ['electric']},
+  {name: 'sandshrew', types: ['ground']},
+  {name: 'sandslash', types: ['ground']},
+  {name: 'nidoran ♀', types: ['poison']},
+  {name: 'nidorina', types: ['poison']},
+  {name: 'nidoqueen', types: ['poison', 'ground']},
+  {name: 'nidoran ♂', types: ['poison']},
+  {name: 'nidorino', types: ['poison']},
+  {name: 'nidoking', types: ['poison', 'ground']},
+  {name: 'clefairy', types: ['fairy']},
+  {name: 'clefable', types: ['fairy']},
+  {name: 'vulpix', types: ['fire']},
+  {name: 'ninetales', types: ['fire']},
+  {name: 'jigglypuff', types: ['normal', 'fairy']},
+  {name: 'wigglypuff', types: ['normal', 'fairy']},
+  {name: 'zubat', types: ['poison', 'flying']},
+  {name: 'golbat', types: ['poison', 'flying']},
+  {name: 'oddish', types: ['grass', 'poison']},
+  {name: 'gloom', types: ['grass', 'poison']},
+  {name: 'vileplume', types: ['grass', 'poison']},
+  {name: 'paras', types: ['bug', 'grass']},
+  {name: 'parasect', types: ['bug', 'grass']},
+  {name: 'venonat', types: ['bug', 'poison']},
+  {name: 'venomoth', types: ['bug', 'poison']},
+  {name: 'diglet', types: ['ground']},
+  {name: 'dugtrio', types: ['ground']},
+  {name: 'meowth', types: ['normal']},
+  {name: 'persian', types: ['normal']},
+  {name: 'psyduck', types: ['water']},
+  {name: 'golduck', types: ['water']},
+  {name: 'mankey', types: ['fighting']},
+  {name: 'primeape', types: ['fighting']},
+  {name: 'growlithe', types: ['fire']},
+  {name: 'arcanine', types: ['fire']},
+  {name: 'poliwag', types: ['water']},
+  {name: 'poliwhirl', types: ['water']},
+  {name: 'poliwrath', types: ['water', 'fighting']},
+  {name: 'abra', types: ['psychic']},
+  {name: 'kadabra', types: ['psychic']},
+  {name: 'alakazam', types: ['psychic']},
+  {name: 'machop', types: ['fighting']},
+  {name: 'machoke', types: ['fighting']},
+  {name: 'machamp', types: ['fighting']},
+  {name: 'bellsprout', types: ['grass', 'poison']},
+  {name: 'weepinbell', types: ['grass', 'poison']},
+  {name: 'victreebel', types: ['grass', 'poison']},
+  {name: 'tentacool', types: ['water', 'poison']},
+  {name: 'tentacruel', types: ['water', 'poison']},
+  {name: 'geodude', types: ['rock', 'ground']},
+  {name: 'graveler', types: ['rock', 'ground']},
+  {name: 'golem', types: ['rock', 'ground']},
+  {name: 'ponyta', types: ['fire']},
+  {name: 'rapidash', types: ['fire']},
+  {name: 'slowpoke', types: ['water', 'psychic']},
+  {name: 'slowbro', types: ['water', 'psychic']},
 ];
 
 pokemonList.forEach((pokemon) => {
-  if (pokemonList.indexOf(pokemon) < 10){
-    pokemon.number = '000' + pokemonList.indexOf(pokemon);
+
+  pokemon.typesImgSrc = [];
+  const pokemonNumber = pokemonList.indexOf(pokemon);
+
+  if (pokemonNumber < 10){
+    pokemon.number = '000' + pokemonNumber;
   } else {
-    if (pokemonList.indexOf(pokemon) < 100){
-      pokemon.number = '00' + pokemonList.indexOf(pokemon);
+    if (pokemonNumber < 100){
+      pokemon.number = '00' + pokemonNumber;
     } else {
-      if (pokemonList.indexOf(pokemon) < 1000){
-        pokemon.number = '0' + pokemonList.indexOf(pokemon);
+      if (pokemonNumber < 1000){
+        pokemon.number = '0' + pokemonNumber;
       } else {
-        pokemon.number = pokemonList.indexOf(pokemon);
+        pokemon.number = pokemonNumber;
       }
     }
   }
@@ -114,6 +140,11 @@ pokemonList.forEach((pokemon) => {
   if (pokemon.name === 'missingNo.'){
     pokemon.imgSrc = "https://wiki.p-insurgence.com/images/0/09/722.png";
   } else {
-    pokemon.imgSrc = mainImgURLTemplate + pokemonList.indexOf(pokemon) + imgSuffixTemplate;
+    pokemon.imgSrc = mainImgURLTemplate + pokemonNumber + imgSuffixTemplate;
   }
+
+  pokemon.spriteSrc = spriteImgURLTemplate + pokemonNumber + imgSuffixTemplate;
+
 });
+
+console.log(pokemonList);

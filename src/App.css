@@ -42,16 +42,22 @@
 }
 
 .pokemonCardNavigation {
+  background: rgba(25, 25, 25, 0.5);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  border-radius: 5px;
   gap: 10px;
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   margin-bottom: 20px;
 }
 
 .pokemonCardNavigation button {
-  width: 130px;
+  width: 60px;
+}
+
+.pokemonCardNavigation p {
+  font-weight: bold;
 }
 
 .pokemonCard {
@@ -59,11 +65,36 @@
   padding: 10px;
 }
 
+.pokemonSprite {
+  margin: 0;
+  margin-left: auto;
+  max-width: 96px;
+  max-height: 96px;
+}
+
+.pokemonArtwork {
+  margin: 0;
+}
+
+.pokemonName,
+.pokemonNumber {
+  font-weight: bold;
+  margin: 0px auto;
+}
+
+.pokemonName {
+  font-size: 50px;
+}
+
+.pokemonNumber {
+  font-size: 25px;
+}
+
 .pokemonDetailsTypes {
   display: flex;
   align-items: center;
   width: 75%;
-  margin: auto;
+  margin: 20px auto;
   justify-content: space-evenly;
   gap: 30px;
 }

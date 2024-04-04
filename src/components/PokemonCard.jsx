@@ -4,12 +4,15 @@ function PokemonCard({pokemon}){
 
 	return(
 		<section className={'pokemonCard ' + pokemon.types[0] + 'Type'}>
-			<figure>
-				{pokemon.imgSrc ? <img src={pokemon.imgSrc} alt={pokemon.name.toLowerCase()}/> : <p title="No image available for this pokemon">???</p>}
-				<figcaption><h1>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1></figcaption>
+			<figure className="pokemonSprite">
+				{pokemon.spriteSrc ? <img src={pokemon.spriteSrc} alt={pokemon.name.toLowerCase() + 'Sprite'}/> : <p title="No sprite available for this pokemon">???</p>}
+			</figure>
+			<figure className="pokemonArtwork">
+				{pokemon.imgSrc ? <img src={pokemon.imgSrc} alt={pokemon.name.toLowerCase() + 'Artwork'}/> : <p title="No image available for this pokemon">???</p>}
 			</figure>
 			<div className="pokemonDetails">
-				<h2>n°{pokemon.number}</h2>
+				<p className="pokemonName">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</p>
+				<p className="pokemonNumber">#{pokemon.number}</p>
 				<div className="pokemonDetailsTypes">
 					<strong>Types:</strong>
 					<div className="pokemonDetailsTypesList">

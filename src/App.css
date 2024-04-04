@@ -40,3 +40,36 @@
 .read-the-docs {
   color: #888;
 }
+
+.pokemonCardNavigation {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.pokemonCardNavigation button {
+  width: 130px;
+}
+
+.pokemonCard {
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.pokemonDetailsTypes {
+  display: flex;
+  align-items: center;
+  width: 75%;
+  margin: auto;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+
+.pokemonDetailsTypesList {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}

@@ -3,12 +3,24 @@ import PropTypes from "prop-types";
 function PokemonCard({pokemon}){
 
 	return(
-		<>
+		<section className="pokemonCard">
 			<figure>
-				{pokemon.imgSrc ? <img src={pokemon.imgSrc} alt={pokemon.name}/> : <p title="No image available for this pokemon">???</p>}
-				<figcaption>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</figcaption>
+				{pokemon.imgSrc ? <img src={pokemon.imgSrc} alt={pokemon.name.toLowerCase()}/> : <p title="No image available for this pokemon">???</p>}
+				<figcaption><h1>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1></figcaption>
 			</figure>
-		</>
+			<div className="pokemonDetails">
+				<h2>n°{pokemon.number}</h2>
+				<div className="pokemonDetailsTypes">
+					<strong>Types:</strong>
+					<div className="pokemonDetailsTypesList">
+						{pokemon.typesImgSrc.map((typeURL) => (
+						<img key={pokemon.types[pokemon.typesImgSrc.indexOf(typeURL)] + "Type"}
+						src={typeURL} alt={pokemon.types[pokemon.typesImgSrc.indexOf(typeURL)] + "TypeIcon"}/>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
 	);
 }
 

@@ -1,7 +1,11 @@
-function NavBar({pokemonIndex, pokemonList, handleClickDecrement, handleClickIncrement, handleClickIndex}){
+function NavBar({
+	pokemonIndex, pokemonList,
+	handleClickDecrement, handleClickIncrement, handleClickIndex,
+	language, handleClickLanguageSwitch
+}){
 
 	return(
-		<section>
+		<nav>
 			<div className="pokemonCardNavigation">
 				{pokemonIndex > 2 ?
 				<button onClick={() => handleClickIndex(1)}>{'<<'}</button>
@@ -25,7 +29,7 @@ function NavBar({pokemonIndex, pokemonList, handleClickDecrement, handleClickInc
 				:
 				<button disabled>{'>>'}</button>}
 			</div>
-		</section>
+		</nav>
 	);
 }
 

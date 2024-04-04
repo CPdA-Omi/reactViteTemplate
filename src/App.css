@@ -41,27 +41,39 @@
   color: #888;
 }
 
+/*=============================================*/
+
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.topNav button {
+  width: 60px;
+  height: 60px;
+}
+
+
+
 .pokemonCardNavigation {
   background: rgba(25, 25, 25, 0.5);
   display: flex;
   justify-content: space-between;
   border-radius: 5px;
   gap: 10px;
-  width: 60%;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
-.pokemonCardNavigation button {
-  width: 60px;
 }
 
 .pokemonCardNavigation p {
   font-weight: bold;
 }
 
+
+
 .pokemonCard {
   border-radius: 30px;
+  margin: 10px auto;
   padding: 10px;
 }
 

@@ -41,7 +41,7 @@ function PokemonCard({pokemon, language}){
 			</div>
 
 			<details className="pokemonDetailedDescription">
-				<summary>{language === 'EN' ? 'View more...' : 'Voir plus...'}</summary>
+				<summary accessKey="d">{language === 'EN' ? 'View more...' : 'Voir plus...'}</summary>
 				{pokemon.imgShinySrc !== '' ?
 				<section className="pokemonShinySection">
 					<strong className="sectionTitle">{language === 'EN' ? 'Shiny variant' : 'Version Shiny'}</strong>

@@ -10,17 +10,17 @@ const pokemonTypes = [
   'fighting',
   'flying',
   'poison',
-  'ground',
+  'ground', // 5
   'rock',
   'bug',
   'ghost',
   'steel',
-  'fire',
+  'fire', // 10
   'water',
   'grass',
   'electric',
   'psychic',
-  'ice',
+  'ice', // 15
   'dragon',
   'dark',
   'fairy'

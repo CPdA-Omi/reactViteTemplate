@@ -122,6 +122,13 @@ export const pokemonList = [
   {name: ['gastly', 'fantominus'],      types: ['ghost', 'poison']},
   {name: ['haunter', 'spectrum'],       types: ['ghost', 'poison']},
   {name: ['gengar', 'ectoplasma'],      types: ['ghost', 'poison']},
+  {name: ['onix', 'onix'],              types: ['rock', 'ground']},
+  {name: ['drowzee', 'soporifik'],      types: ['psychic']},
+  {name: ['hypno', 'hypnomade'],        types: ['psychic']},
+  {name: ['krabby', 'krabby'],          types: ['water']},
+  {name: ['kingler', 'krabboss'],       types: ['water']},
+  {name: ['voltorb', 'voltorbe'],       types: ['electric']},
+  {name: ['electrode', 'électrode'],    types: ['electric']},
 ];
 
 pokemonList.forEach((pokemon) => {

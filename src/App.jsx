@@ -9,10 +9,10 @@ import NavBar from './components/NavBar.jsx'
 
 function App() {
 
-  useState(() => {
+  /*useState(() => {
     alert('Hello Pokemon trainer :)');
     }
-  );
+  );*/
 
   const [language, setLanguage] = useState('EN');
 

@@ -113,6 +113,15 @@ export const pokemonList = [
   {name: ['farfetch\'d', 'canarticho'], types: ['normal', 'flying']},
   {name: ['doduo', 'doduo'],            types: ['normal', 'flying']},
   {name: ['dodrio', 'dodrio'],          types: ['normal', 'flying']},
+  {name: ['seel', 'otaria'],            types: ['water']},
+  {name: ['dewgong', 'lamantine'],      types: ['water', 'ice']},
+  {name: ['grimer', 'tadmorv'],         types: ['poison']},
+  {name: ['muk', 'grotadmorv'],         types: ['poison']},
+  {name: ['shellder', 'kokiyas'],       types: ['water']},
+  {name: ['cloyster', 'crustabri'],     types: ['water', 'ice']},
+  {name: ['gastly', 'fantominus'],      types: ['ghost', 'poison']},
+  {name: ['haunter', 'spectrum'],       types: ['ghost', 'poison']},
+  {name: ['gengar', 'ectoplasma'],      types: ['ghost', 'poison']},
 ];
 
 pokemonList.forEach((pokemon) => {
@@ -142,12 +151,15 @@ pokemonList.forEach((pokemon) => {
     }
   });
 
-  if (pokemon.name === 'missingNo.'){
+  if (pokemon.name[0] === 'missingNo.'){
     pokemon.imgSrc = "https://wiki.p-insurgence.com/images/0/09/722.png";
+    pokemon.imgShinySrc = "";
   } else {
     pokemon.imgSrc = mainImgURLTemplate + pokemonNumber + imgSuffixTemplate;
+    pokemon.imgShinySrc = mainImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
   }
 
   pokemon.spriteSrc = spriteImgURLTemplate + pokemonNumber + imgSuffixTemplate;
+  pokemon.spriteShinySrc = spriteImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
 
 });

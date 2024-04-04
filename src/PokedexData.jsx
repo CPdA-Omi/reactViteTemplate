@@ -3,7 +3,7 @@ const mainImgURLTemplate = apiURL + "pokemon/other/official-artwork/"
 const typeImgURLTemplate = apiURL + "types/generation-viii/legends-arceus/"
 const imgSuffixTemplate = ".png"
 
-const pokemonTypesId = [
+const pokemonTypes = [
   'unknown',
   'normal',
   'fighting',
@@ -67,6 +67,25 @@ export const pokemonList = [
   {name: 'ninetales', types: ['fire'], typesImgSrc: []},
   {name: 'jigglypuff', types: ['normal', 'fairy'], typesImgSrc: []},
   {name: 'wigglypuff', types: ['normal', 'fairy'], typesImgSrc: []},
+  {name: 'zubat', types: ['poison', 'flying'], typesImgSrc: []},
+  {name: 'golbat', types: ['poison', 'flying'], typesImgSrc: []},
+  {name: 'oddish', types: ['grass', 'poison'], typesImgSrc: []},
+  {name: 'gloom', types: ['grass', 'poison'], typesImgSrc: []},
+  {name: 'vileplume', types: ['grass', 'poison'], typesImgSrc: []},
+  {name: 'paras', types: ['bug', 'grass'], typesImgSrc: []},
+  {name: 'parasect', types: ['bug', 'grass'], typesImgSrc: []},
+  {name: 'venonat', types: ['bug', 'poison'], typesImgSrc: []},
+  {name: 'venomoth', types: ['bug', 'poison'], typesImgSrc: []},
+  {name: 'diglet', types: ['ground'], typesImgSrc: []},
+  {name: 'dugtrio', types: ['ground'], typesImgSrc: []},
+  {name: 'meowth', types: ['normal'], typesImgSrc: []},
+  {name: 'persian', types: ['normal'], typesImgSrc: []},
+  {name: 'psyduck', types: ['water'], typesImgSrc: []},
+  {name: 'golduck', types: ['water'], typesImgSrc: []},
+  {name: 'mankey', types: ['fighting'], typesImgSrc: []},
+  {name: 'primeape', types: ['fighting'], typesImgSrc: []},
+  {name: 'growlithe', types: ['fire'], typesImgSrc: []},
+  {name: 'arcanine', types: ['fire'], typesImgSrc: []},
 ];
 
 pokemonList.forEach((pokemon) => {
@@ -88,7 +107,7 @@ pokemonList.forEach((pokemon) => {
     if (type === 'unknown'){
       pokemon.typesImgSrc.push("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-iii/emerald/10001.png");
     } else {
-      pokemon.typesImgSrc.push(typeImgURLTemplate + pokemonTypesId.indexOf(type) + imgSuffixTemplate);
+      pokemon.typesImgSrc.push(typeImgURLTemplate + pokemonTypes.indexOf(type) + imgSuffixTemplate);
     }
   });
 

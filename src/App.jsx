@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import './Types.css'
 import { pokemonList } from './PokedexData.jsx'
 
 import PokemonCard from './components/PokemonCard.jsx'

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 function PokemonCard({pokemon}){
 
 	return(
-		<section className="pokemonCard">
+		<section className={'pokemonCard ' + pokemon.types[0] + 'Type'}>
 			<figure>
 				{pokemon.imgSrc ? <img src={pokemon.imgSrc} alt={pokemon.name.toLowerCase()}/> : <p title="No image available for this pokemon">???</p>}
 				<figcaption><h1>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1></figcaption>

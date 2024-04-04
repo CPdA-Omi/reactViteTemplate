@@ -1,0 +1,71 @@
+.normalType{
+  background: rgba(169, 169, 169, 0.5);
+}
+
+.fightingType{
+  background: rgba(218, 165, 32, 0.5);
+}
+
+.flyingType{
+  background: rgba(135, 206, 250, 0.5);
+}
+
+.poisonType{
+  background: rgba(147, 112, 219, 0.5);
+}
+
+.groundType{
+  background: rgba(210, 180, 140, 0.5);
+}
+
+.rockType{
+  background: rgba(245, 222, 179, 0.5);
+}
+
+.bugType{
+  background: rgba(127, 142, 35, 0.5);
+}
+
+.ghostType{
+  background: rgba(188, 143, 143, 0.5);
+}
+
+.steelType{
+  background: rgba(192, 192, 192, 0.5);
+}
+
+.fireType{
+  background: rgba(255, 99, 71, 0.5);
+}
+
+.waterType{
+  background: rgba(70, 130, 180, 0.5);
+}
+
+.grassType{
+  background: rgba(40, 128, 40, 0.5);
+}
+
+.electricType{
+  background: rgba(255, 215, 0, 0.5);
+}
+
+.psychicType{
+  background: rgba(233, 150, 122, 0.5);
+}
+
+.iceType{
+  background: rgba(150, 255, 255, 0.5);
+}
+
+.dragonType{
+  background: rgba(85, 107, 47, 0.5);
+}
+
+.darkType{
+  background: rgba(105, 105, 105, 0.5);
+}
+
+.fairyType{
+  background: rgba(255, 192, 203, 0.5);
+}

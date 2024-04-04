@@ -30,10 +30,25 @@ const pokemonList = [
   {name: 'fearow', imgSrc: imgURLTemplate + 22 + '.png'},
   {name: 'ekans', imgSrc: imgURLTemplate + 23 + '.png'},
   {name: 'arbok', imgSrc: imgURLTemplate + 24 + '.png'},
+  {name: 'pikachu', imgSrc: imgURLTemplate + 25 + '.png'},
+  {name: 'raichu', imgSrc: imgURLTemplate + 26 + '.png'},
+  {name: 'sandshrew', imgSrc: imgURLTemplate + 27 + '.png'},
+  {name: 'sandslash', imgSrc: imgURLTemplate + 28 + '.png'},
+  {name: 'nidoran ♀', imgSrc: imgURLTemplate + 29 + '.png'},
+  {name: 'nidorina', imgSrc: imgURLTemplate + 30 + '.png'},
+  {name: 'nidoqueen', imgSrc: imgURLTemplate + 31 + '.png'},
+  {name: 'nidoran ♂', imgSrc: imgURLTemplate + 32 + '.png'},
+  {name: 'nidorino', imgSrc: imgURLTemplate + 33 + '.png'},
+  {name: 'nidoking', imgSrc: imgURLTemplate + 34 + '.png'},
   {name: 'mew'},
 ];
 
 function App() {
+
+  useState(() => {
+    alert('Hello Pokemon trainer :)');
+    }
+  );
 
   const [pokemonIndex, setPokemonIndex] = useState(0);
 
@@ -51,6 +66,9 @@ function App() {
 
   const handleClickIndex = (index) => {
     if (pokemonIndex !== index){
+      if (pokemonList[index].name === 'pikachu'){
+        alert('Pika pikachu !!!');
+      }
       setPokemonIndex(index);
     }
   }

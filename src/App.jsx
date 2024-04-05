@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import './Types.css'
-import { pokemonList } from './PokedexData.jsx'
+import { pokemonList } from './PokedexData.js'
 
 import SettingsMenu from './components/SettingsMenu.jsx'
 import PokemonCard from './components/PokemonCard.jsx'
@@ -24,27 +24,39 @@ function App() {
     }
   }
 
+  const [pokemonVariant, setPokemonVariant] = useState(-1);
+
+  const handleClickVariant = (variantIndex) => {
+    if (pokemonVariant !== variantIndex){
+      setPokemonVariant(variantIndex);
+    }
+  }
+
   const [pokemonIndex, setPokemonIndex] = useState(1);
 
   const handleClickDecrement = () => {
     if (pokemonIndex > 1){
+      if (!pokemonList[pokemonIndex - 1].variants || (pokemonList[pokemonIndex - 1].variants.length)-1 < pokemonVariant){
+        setPokemonVariant(-1);
+      }
       setPokemonIndex(pokemonIndex - 1);
     }
   }
 
   const handleClickIncrement = () => {
     if (pokemonIndex < pokemonList.length - 1){
+      if (!pokemonList[pokemonIndex + 1].variants || (pokemonList[pokemonIndex + 1].variants.length)-1 < pokemonVariant){
+        setPokemonVariant(-1);
+      }
       setPokemonIndex(pokemonIndex + 1);
     }
   }
 
   const handleClickIndex = (index) => {
     if (pokemonIndex !== index){
-      if (pokemonList[index].name === 'pikachu'){
-        alert('Pika pikachu !!!');
-      }
       setPokemonIndex(index);
     }
+    setPokemonVariant(-1);
   }
 
   return (
@@ -67,6 +79,8 @@ function App() {
       <PokemonCard
       pokemon={pokemonList[pokemonIndex]}
       language={language}
+      pokemonVariant={pokemonVariant}
+      handleClickVariant={handleClickVariant}
       />
     </>
   )

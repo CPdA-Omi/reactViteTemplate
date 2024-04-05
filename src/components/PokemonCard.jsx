@@ -1,59 +1,62 @@
-function PokemonCard({pokemon, language}){
+function PokemonCard({
+	pokemon, language,
+	pokemonVariant, handleClickVariant	
+}){
+
+	let currentPokemon = '';
+	if (pokemonVariant === -1){
+		currentPokemon = pokemon;
+	} else {
+		currentPokemon = pokemon.variants[pokemonVariant];
+	}
 
 	return(
-		<section className={'pokemonCard ' + pokemon.types[0] + 'Type'}>
+		<section className={'pokemonCard ' + currentPokemon.types[0] + 'Type'}>
 
-			<figure className="pokemonSprite">
-				{pokemon.spriteSrc ?
-				<img src={pokemon.spriteSrc} alt={(language === 'EN' ?
-													pokemon.name[0].toLowerCase()
-													:
-													pokemon.name[1].toLowerCase()) + 'Sprite'}/>
+			<div className="pokemonCardTopNavigation">
+				{pokemon.variants ?
+				<div className="pokemonRegionalVariantsSelector">
+					<img onClick={() => handleClickVariant(-1)}
+						title={pokemon.name[language].charAt(0).toUpperCase() + pokemon.name[language].slice(1)} src={pokemon.spriteSrc}
+					alt={pokemon.name[language].toLowerCase() + 'Sprite'}/>
+					{pokemon.variants.map((variant) => (
+						<img key={pokemon.name[language].toLowerCase() + 'RegionalVariant' + pokemon.variants.indexOf(variant)}
+						onClick={() => handleClickVariant(pokemon.variants.indexOf(variant))}
+						title={variant.name[language].charAt(0).toUpperCase() + variant.name[language].slice(1)}
+						src={variant.spriteSrc} alt={variant.name[language].toLowerCase() + 'Sprite'}/>
+					))}
+				</div>
 				:
-				<p title="No sprite available for this pokemon">???</p>}
-			</figure>
+				<div className="placeHolderDivBecauseThereIsNoRegionalVariantsHere"></div>
+				}
+				<div className="pokemonEvolutionsSelector">
+					<img src={currentPokemon.spriteSrc} alt={currentPokemon.name[language].toLowerCase() + 'Sprite'}/>
+				</div>
+			</div>
 
 			<figure className="pokemonArtwork">
-				{pokemon.imgSrc ?
-				<img src={pokemon.imgSrc} alt={(language === 'EN' ?
-												pokemon.name[0].toLowerCase()
-												:
-												pokemon.name[1].toLowerCase()) + 'Artwork'}/>
-				:
-				<p title="No image available for this pokemon">???</p>}
+				<img src={currentPokemon.imgSrc} alt={currentPokemon.name[language].toLowerCase() + 'Artwork'}/>
 			</figure>
 
 			<div className="pokemonDescription">
-				<p className="pokemonName">{(language === 'EN' ?
-											pokemon.name[0].charAt(0).toUpperCase() + pokemon.name[0].slice(1)
-											:
-											pokemon.name[1].charAt(0).toUpperCase() + pokemon.name[1].slice(1))}</p>
+				<p className="pokemonName">{currentPokemon.name[language].charAt(0).toUpperCase() + currentPokemon.name[language].slice(1)}</p>
 				<p className="pokemonNumber">{(language === 'FR' ? 'n°' : '#') + pokemon.number}</p>
-				<div className="pokemonDescriptionTypes">
-					<strong className="sectionTitle">Types:</strong>
-					<div className="pokemonDescriptionTypesList">
-						{pokemon.typesImgSrc.map((typeURL) => (
-						<img key={pokemon.types[pokemon.typesImgSrc.indexOf(typeURL)] + "Type"}
-						src={typeURL} alt={pokemon.types[pokemon.typesImgSrc.indexOf(typeURL)] + "TypeIcon"}/>
-						))}
-					</div>
+				<div className="pokemonDescriptionTypesList">
+					{currentPokemon.typesImgSrc.map((typeURL) => (
+					<img key={currentPokemon.types[currentPokemon.typesImgSrc.indexOf(typeURL)] + "Type"}
+					src={typeURL} alt={currentPokemon.types[currentPokemon.typesImgSrc.indexOf(typeURL)] + "TypeIcon"}/>
+					))}
 				</div>
 			</div>
 
 			<details className="pokemonDetailedDescription">
 				<summary accessKey="d">{(language === 'EN' ? 'View more' : 'Voir plus') + '...'}</summary>
-				{pokemon.imgShinySrc ?
+				{currentPokemon.imgShinySrc ?
 				<section className="pokemonShinySection">
 					<strong className="sectionTitle">{language === 'EN' ? 'Shiny variant' : 'Version Shiny'}</strong>
 					<div>
-						<img src={pokemon.imgShinySrc} alt={(language === 'EN' ?
-															pokemon.name[0].toLowerCase()
-															:
-															pokemon.name[1].toLowerCase()) + 'ShinyArtwork'}/>
-						<img src={pokemon.spriteShinySrc} alt={(language === 'EN' ?
-																pokemon.name[0].toLowerCase()
-																:
-																pokemon.name[1].toLowerCase()) + 'ShinySprite'}/>
+						<img src={currentPokemon.imgShinySrc} alt={currentPokemon.name[language].toLowerCase() + 'ShinyArtwork'}/>
+						<img src={currentPokemon.spriteShinySrc} alt={currentPokemon.name[language].toLowerCase() + 'ShinySprite'}/>
 					</div>
 				</section>
 				:
@@ -62,15 +65,9 @@ function PokemonCard({pokemon, language}){
 				<section className="pokemonFemaleSection">
 					<strong className="sectionTitle">{language === 'EN' ? 'Female variant' : 'Version femelle'}</strong>
 					<div>
-						<img src={pokemon.spriteFemaleSrc} title='Female Sprite' alt={(language === 'EN' ?
-																						pokemon.name[0].toLowerCase()
-																						:
-																						pokemon.name[1].toLowerCase()) + 'FemaleSprite'}/>
+						<img src={pokemon.spriteFemaleSrc} title='Female Sprite' alt={pokemon.name[language].toLowerCase() + 'FemaleSprite'}/>
 
-						<img src={pokemon.spriteFemaleShinySrc} title='Female Shiny Sprite' alt={(language === 'EN' ?
-																									pokemon.name[0].toLowerCase()
-																									:
-																									pokemon.name[1].toLowerCase()) + 'FemaleShinySprite'}/>
+						<img src={pokemon.spriteFemaleShinySrc} title='Female Shiny Sprite' alt={pokemon.name[language].toLowerCase() + 'FemaleShinySprite'}/>
 					</div>
 				</section>
 				:

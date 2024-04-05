@@ -61,13 +61,13 @@ function PokemonCard({
 				</section>
 				:
 				<p></p>}
-				{pokemon.spriteFemaleSrc ?
+				{currentPokemon.spriteFemaleSrc ?
 				<section className="pokemonFemaleSection">
 					<strong className="sectionTitle">{language === 'EN' ? 'Female variant' : 'Version femelle'}</strong>
 					<div>
-						<img src={pokemon.spriteFemaleSrc} title='Female Sprite' alt={pokemon.name[language].toLowerCase() + 'FemaleSprite'}/>
+						<img src={currentPokemon.spriteFemaleSrc} title='Female Sprite' alt={currentPokemon.name[language].toLowerCase() + 'FemaleSprite'}/>
 
-						<img src={pokemon.spriteFemaleShinySrc} title='Female Shiny Sprite' alt={pokemon.name[language].toLowerCase() + 'FemaleShinySprite'}/>
+						<img src={currentPokemon.spriteFemaleShinySrc} title='Female Shiny Sprite' alt={currentPokemon.name[language].toLowerCase() + 'FemaleShinySprite'}/>
 					</div>
 				</section>
 				:

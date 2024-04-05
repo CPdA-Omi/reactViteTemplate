@@ -28,7 +28,7 @@ function PokemonCard({pokemon, language}){
 											pokemon.name[0].charAt(0).toUpperCase() + pokemon.name[0].slice(1)
 											:
 											pokemon.name[1].charAt(0).toUpperCase() + pokemon.name[1].slice(1))}</p>
-				<p className="pokemonNumber">#{pokemon.number}</p>
+				<p className="pokemonNumber">{(language === 'FR' ? 'n°' : '#') + pokemon.number}</p>
 				<div className="pokemonDescriptionTypes">
 					<strong className="sectionTitle">Types:</strong>
 					<div className="pokemonDescriptionTypesList">
@@ -41,7 +41,7 @@ function PokemonCard({pokemon, language}){
 			</div>
 
 			<details className="pokemonDetailedDescription">
-				<summary accessKey="d">{language === 'EN' ? 'View more...' : 'Voir plus...'}</summary>
+				<summary accessKey="d">{(language === 'EN' ? 'View more' : 'Voir plus') + '...'}</summary>
 				{pokemon.imgShinySrc !== '' ?
 				<section className="pokemonShinySection">
 					<strong className="sectionTitle">{language === 'EN' ? 'Shiny variant' : 'Version Shiny'}</strong>

@@ -144,18 +144,19 @@ strong.sectionTitle {
   cursor: pointer;
 }
 
+.pokemonDetailedDescription div {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
 .pokemonShinySection {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  margin: 0 auto;
-  padding: 10px 0;
-}
-
-.pokemonShinySection div {
-  display: flex;
-  justify-content: space-around;
 }
 
 .pokemonShinySection img:first-child {

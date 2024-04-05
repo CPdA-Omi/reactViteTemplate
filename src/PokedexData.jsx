@@ -26,6 +26,10 @@ const pokemonTypes = [
   'fairy'
 ];
 
+const pokemonGenderVariant = [
+  3, 12, 20, 25, 26, 41, 42, 44, 45, 64, 65, 84, 85, 97, 111, 112, 118, 119, 123, 129, 130
+];
+
 export const pokemonList = [
   {name: ['missingNo.', 'missingNo.'],  types: ['flying', 'normal']},
   {name: ['bulbasaur', 'bulbizarre'],   types: ['grass', 'poison']},
@@ -219,4 +223,11 @@ pokemonList.forEach((pokemon) => {
   pokemon.spriteSrc = spriteImgURLTemplate + pokemonNumber + imgSuffixTemplate;
   pokemon.spriteShinySrc = spriteImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
 
+  if (pokemonGenderVariant.includes(pokemonList.indexOf(pokemon))){
+    pokemon.spriteFemaleSrc = spriteImgURLTemplate + 'female/' + pokemonNumber + imgSuffixTemplate;
+    pokemon.spriteFemaleShinySrc = spriteImgURLTemplate + 'shiny/female/' + pokemonNumber + imgSuffixTemplate;
+  }
+
 });
+
+console.log(pokemonList);

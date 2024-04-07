@@ -1,5 +1,6 @@
 function PokemonCard({
 	pokemon, language,
+	handleClickIndex,
 	pokemonVariant, handleClickVariant	
 }){
 
@@ -17,20 +18,33 @@ function PokemonCard({
 				{pokemon.variants ?
 				<div className="pokemonRegionalVariantsSelector">
 					<img onClick={() => handleClickVariant(-1)}
-						title={pokemon.name[language].charAt(0).toUpperCase() + pokemon.name[language].slice(1)} src={pokemon.spriteSrc}
-					alt={pokemon.name[language].toLowerCase() + 'Sprite'}/>
+						title={pokemon.name[language].charAt(0).toUpperCase() + pokemon.name[language].slice(1)}
+						src={pokemon.spriteSrc} alt={pokemon.name[language].toLowerCase() + 'Sprite'}/>
 					{pokemon.variants.map((variant) => (
 						<img key={pokemon.name[language].toLowerCase() + 'RegionalVariant' + pokemon.variants.indexOf(variant)}
 						onClick={() => handleClickVariant(pokemon.variants.indexOf(variant))}
 						title={variant.name[language].charAt(0).toUpperCase() + variant.name[language].slice(1)}
-						src={variant.spriteSrc} alt={variant.name[language].toLowerCase() + 'Sprite'}/>
+						src={variant.spriteSrc} alt={variant.name[language].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 					))}
 				</div>
 				:
 				<div className="placeHolderDivBecauseThereIsNoRegionalVariantsHere"></div>
 				}
 				<div className="pokemonEvolutionsSelector">
-					<img src={currentPokemon.spriteSrc} alt={currentPokemon.name[language].toLowerCase() + 'Sprite'}/>
+					{pokemon.evolutions ?
+						<>
+						{pokemon.evolutions.map((evolution) => (
+							<img key={evolution.name[language].toLowerCase() + 'Evolution'}
+							onClick={() => handleClickIndex(evolution.isOutOfRange ? parseInt(pokemon.number) : evolution.evolutionIndex)}
+							title={evolution.name[language].charAt(0).toUpperCase() + evolution.name[language].slice(1)}
+							src={evolution.spriteSrc} alt={evolution.name[language].toLowerCase() + 'Sprite'}/>
+						))}
+						</>
+					:
+						<>
+						<img src={currentPokemon.spriteSrc} alt={currentPokemon.name[language].toLowerCase() + 'Sprite'}/>
+						</>
+					}
 				</div>
 			</div>
 
@@ -65,9 +79,9 @@ function PokemonCard({
 				<section className="pokemonFemaleSection">
 					<strong className="sectionTitle">{language === 'EN' ? 'Female variant' : 'Version femelle'}</strong>
 					<div>
-						<img src={currentPokemon.spriteFemaleSrc} title='Female Sprite' alt={currentPokemon.name[language].toLowerCase() + 'FemaleSprite'}/>
+						<img src={currentPokemon.spriteFemaleSrc} title='Female Sprite' alt={currentPokemon.name[language].toLowerCase().replace(/\s/g, '') + 'FemaleSprite'}/>
 
-						<img src={currentPokemon.spriteFemaleShinySrc} title='Female Shiny Sprite' alt={currentPokemon.name[language].toLowerCase() + 'FemaleShinySprite'}/>
+						<img src={currentPokemon.spriteFemaleShinySrc} title='Female Shiny Sprite' alt={currentPokemon.name[language].toLowerCase().replace(/\s/g, '') + 'FemaleShinySprite'}/>
 					</div>
 				</section>
 				:

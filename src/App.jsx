@@ -54,9 +54,11 @@ function App() {
 
   const handleClickIndex = (index) => {
     if (pokemonIndex !== index){
+      if (!pokemonList[index].variants || (pokemonList[index].variants.length)-1 < pokemonVariant){
+        setPokemonVariant(-1);
+      }
       setPokemonIndex(index);
     }
-    setPokemonVariant(-1);
   }
 
   return (
@@ -79,6 +81,7 @@ function App() {
       <PokemonCard
       pokemon={pokemonList[pokemonIndex]}
       language={language}
+      handleClickIndex={handleClickIndex}
       pokemonVariant={pokemonVariant}
       handleClickVariant={handleClickVariant}
       />

@@ -31,13 +31,13 @@ function PokemonCard({
 				<div className="placeHolderDivBecauseThereIsNoRegionalVariantsHere"></div>
 				}
 				<div className="pokemonEvolutionsSelector">
-					{pokemon.evolutions ?
+					{currentPokemon.evolutions ?
 						<>
-						{pokemon.evolutions.map((evolution) => (
-							<img key={evolution.name[language].toLowerCase() + 'Evolution'}
-							onClick={() => handleClickIndex(evolution.isOutOfRange ? parseInt(pokemon.number) : evolution.evolutionIndex)}
+						{currentPokemon.evolutions.map((evolution) => (
+							<img key={evolution.spriteSrc + 'Evolution'/*have to be replaced later by name[language]*/}
+							onClick={() => handleClickIndex(evolution.isOutOfRange ? parseInt(currentPokemon.number) : evolution.evolutionIndex)}
 							title={evolution.name[language].charAt(0).toUpperCase() + evolution.name[language].slice(1)}
-							src={evolution.spriteSrc} alt={evolution.name[language].toLowerCase() + 'Sprite'}/>
+							src={evolution.spriteSrc} alt={evolution.name[language].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 						))}
 						</>
 					:

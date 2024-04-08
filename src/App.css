@@ -103,6 +103,7 @@ strong.sectionTitle {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  margin-left: 10px;
 }
 
 .pokemonRegionalVariantsSelector img {
@@ -112,8 +113,8 @@ strong.sectionTitle {
 .pokemonEvolutionsSelector {
   display: flex;
   max-width: 85%;
-  flex-direction: row-reverse;
   overflow-x: auto;
+  margin: 10px 10px 0 0;
 }
 
 .pokemonEvolutionsSelector img {

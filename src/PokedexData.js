@@ -7,7 +7,8 @@ const imgSuffixTemplate = ".png"
 
 //errors definitions dictionnary
 export const errorsDefinitions = {
-  missingPokemon: {EN: 'Pokemon not implemented yet',   FR: 'Pokémon pas encore implémenté'},
+  missingPokemon:         {EN: 'Pokemon not implemented yet',           FR: 'Pokémon pas encore implémenté'},
+  missingRegionalPokemon: {EN: 'Regional variant not implemented yet',  FR: 'Variante régionale pas encore implémentée'},
 };
 
 //works with index
@@ -45,7 +46,8 @@ const regionalFormsNames = {
 
 //index of pokemonList which have a variant due to the pokemon gender
 const pokemonGenderVariants = [
-  3, 12, 20, 25, 26, 41, 42, 44, 45, 64, 65, 84, 85, 97, 111, 112, 118, 119, 123, 129, 130
+  3, 12, 20, 25, 26, 41, 42, 44, 45, 64, 65, 84, 85, 97, 111, 112, 118, 119, 123, 129, 130,
+  154, 165, 166, 178, 185, 186, 190, 194, 195, 198, 202, 203, 207, 208, 212, 214, 215, 217, 221, 224, 229, 232
 ];
 
 //evolutions order have to be in crescent evolutions order
@@ -71,14 +73,14 @@ export const pokemonList = [
 /*0018*/  {name: {EN: 'pidgeot',      FR: 'roucarnage'},    types: ['normal', 'flying']},
   
 /*0019*/  {name: {EN: 'rattata',      FR: 'rattata'},       types: ['normal'],                      evolutionsIndex: [19, 20],
-    variants: [
-                {imgVariantIndex: 10091, regionName: 'alola', types: ['dark', 'normal']}
-              ]},
+      variants: [
+                  {imgVariantIndex: 10091, regionName: 'alola', types: ['dark', 'normal']}
+                ]},
 
 /*0020*/  {name: {EN: 'raticate',     FR: 'rattatac'},      types: ['normal'],
-    variants: [
-                {imgVariantIndex: 10092, regionName: 'alola', types: ['dark', 'normal']}
-              ]},
+      variants: [
+                  {imgVariantIndex: 10092, regionName: 'alola', types: ['dark', 'normal']}
+                ]},
 /*0021*/  {name: {EN: 'spearow',      FR: 'piafabec'},      types: ['normal', 'flying'],            evolutionsIndex: [21, 22]},
 /*0022*/  {name: {EN: 'fearow',       FR: 'rapasdepic'},    types: ['normal', 'flying']},
 /*0023*/  {name: {EN: 'ekans',        FR: 'abo'},           types: ['poison'],                      evolutionsIndex: [23, 24]},
@@ -86,19 +88,20 @@ export const pokemonList = [
 /*0025*/  {name: {EN: 'pikachu',      FR: 'pikachu'},       types: ['electric'],                    evolutionsIndex: [172, 25, 26]},
   
 /*0026*/  {name: {EN: 'raichu',       FR: 'raichu'},        types: ['electric'],
-    variants: [
-                {imgVariantIndex: 10100, regionName: 'alola', types: ['electric', 'psychic']}
+      variants: [
+              {imgVariantIndex: 10100, regionName: 'alola', types: ['electric', 'psychic'],
+                followEvolution: false}
               ]},
 
 /*0027*/  {name: {EN: 'sandshrew',    FR: 'sabelette'},     types: ['ground'],                      evolutionsIndex: [27, 28],
-    variants: [
-              {imgVariantIndex: 10101, regionName: 'alola', types: ['ice', 'steel']}
-            ]},
+      variants: [
+                {imgVariantIndex: 10101, regionName: 'alola', types: ['ice', 'steel']}
+              ]},
 
 /*0028*/  {name: {EN: 'sandslash',    FR: 'sablaireau'},    types: ['ground'],
-      variants: [
-                {imgVariantIndex: 10102, regionName: 'alola', types: ['ice', 'steel']}
-              ]},
+        variants: [
+                  {imgVariantIndex: 10102, regionName: 'alola', types: ['ice', 'steel']}
+                ]},
 
 /*0029*/  {name: {EN: 'nidoran ♀',    FR: 'nidoran ♀'},     types: ['poison'],                      evolutionsIndex: [29, 30, 31]},
 /*0030*/  {name: {EN: 'nidorina',     FR: 'nidorina'},      types: ['poison']},
@@ -106,18 +109,18 @@ export const pokemonList = [
 /*0032*/  {name: {EN: 'nidoran ♂',    FR: 'nidoran ♂'},     types: ['poison'],                      evolutionsIndex: [32, 33, 34]},
 /*0033*/  {name: {EN: 'nidorino',     FR: 'nidorino'},      types: ['poison']},
 /*0034*/  {name: {EN: 'nidoking',     FR: 'nidoking'},      types: ['poison', 'ground']},
-/*0035*/  {name: {EN: 'clefairy',     FR: 'mélofée'},       types: ['fairy'],                       evolutionsIndex: [35, 36]},
+/*0035*/  {name: {EN: 'clefairy',     FR: 'mélofée'},       types: ['fairy'],                       evolutionsIndex: [173, 35, 36]},
 /*0036*/  {name: {EN: 'clefable',     FR: 'mélodelfe'},     types: ['fairy']},
 
 /*0037*/  {name: {EN: 'vulpix',       FR: 'goupix'},        types: ['fire'],                        evolutionsIndex: [37, 38],
-      variants: [
-                {imgVariantIndex: 10103, regionName: 'alola', types: ['ice']}
-              ]},
+        variants: [
+                  {imgVariantIndex: 10103, regionName: 'alola', types: ['ice']}
+                ]},
 
 /*0038*/  {name: {EN: 'ninetales',    FR: 'feunard'},       types: ['fire'],
-      variants: [
-                {imgVariantIndex: 10104, regionName: 'alola', types: ['ice', 'fairy']}
-              ]},
+        variants: [
+                  {imgVariantIndex: 10104, regionName: 'alola', types: ['ice', 'fairy']}
+                ]},
 
 /*0039*/  {name: {EN: 'jigglypuff',   FR: 'rondoudou'},     types: ['normal', 'fairy'],             evolutionsIndex: [174, 39, 40]},
 /*0040*/  {name: {EN: 'wigglypuff',   FR: 'grodoudou'},     types: ['normal', 'fairy']},
@@ -132,26 +135,26 @@ export const pokemonList = [
 /*0049*/  {name: {EN: 'venomoth',     FR: 'aéromite'},      types: ['bug', 'poison']},
 
 /*0050*/  {name: {EN: 'diglet',       FR: 'taupiqueur'},    types: ['ground'],                      evolutionsIndex: [50, 51],
-      variants: [
-                {imgVariantIndex: 10105, regionName: 'alola', types: ['ground', 'steel']}
-              ]},
+        variants: [
+                  {imgVariantIndex: 10105, regionName: 'alola', types: ['ground', 'steel']}
+                ]},
 
 /*0051*/  {name: {EN: 'dugtrio',      FR: 'triopikeur'},    types: ['ground'],
-      variants: [
-                {imgVariantIndex: 10106, regionName: 'alola', types: ['ground', 'steel']}
-              ]},
+        variants: [
+                  {imgVariantIndex: 10106, regionName: 'alola', types: ['ground', 'steel']}
+                ]},
 
 /*0052*/  {name: {EN: 'meowth',       FR: 'miaouss'},       types: ['normal'],                      evolutionsIndex: [52, 53],
-      variants: [
-                {imgVariantIndex: 10107, regionName: 'alola', types: ['dark']},
-                {imgVariantIndex: 10161, regionName: 'galar', types: ['steel'],
+        variants: [
+                  {imgVariantIndex: 10107, regionName: 'alola', types: ['dark']},
+                  {imgVariantIndex: 10161, regionName: 'galar', types: ['steel'],
                   evolutionsIndex: [52, 863]}
               ]},
 
 /*0053*/  {name: {EN: 'persian',      FR: 'persian'},       types: ['normal'],
-      variants: [
-                {imgVariantIndex: 10108, regionName: 'alola', types: ['dark']}
-              ]},
+        variants: [
+                  {imgVariantIndex: 10108, regionName: 'alola', types: ['dark']}
+                ]},
 
 /*0054*/  {name: {EN: 'psyduck',      FR: 'psykokwak'},     types: ['water'],                       evolutionsIndex: [54, 55]},
 /*0055*/  {name: {EN: 'golduck',      FR: 'akwakwak'},      types: ['water']},
@@ -219,9 +222,10 @@ export const pokemonList = [
 
 /*0081*/  {name: {EN: 'magnemite',    FR: 'magnéti'},       types: ['electric', 'steel'],         evolutionsIndex: [81, 82, 462]},
 /*0082*/  {name: {EN: 'magneton',     FR: 'magnéton'},      types: ['electric', 'steel']},
-/*0083*/  {name: {EN: 'farfetch\'d',  FR:  'canarticho'},   types: ['normal', 'flying'],          evolutionsIndex: [83, 865],
+/*0083*/  {name: {EN: 'farfetch\'d',  FR:  'canarticho'},   types: ['normal', 'flying'],
           variants: [
-                {imgVariantIndex: 10166, regionName: 'galar', types: ['fighting']}
+                {imgVariantIndex: 10166, regionName: 'galar', types: ['fighting'],
+                evolutionsIndex: [83, 865]}
               ]},
 /*0084*/  {name: {EN: 'doduo',        FR: 'doduo'},         types: ['normal', 'flying'],          evolutionsIndex: [84, 85]},
 /*0085*/  {name: {EN: 'dodrio',       FR: 'dodrio'},        types: ['normal', 'flying']},
@@ -282,9 +286,9 @@ export const pokemonList = [
 
 /*0110*/  {name: {EN: 'weezing',      FR: 'smogogo'},       types: ['poison'],
           variants: [
-                {imgVariantIndex: 10167, regionName: 'galar', types: ['poison', 'fairy'],
-                  followEvolution: false}
-              ]},
+                  {imgVariantIndex: 10167, regionName: 'galar', types: ['poison', 'fairy'],
+                    followEvolution: false}
+                ]},
 /*0111*/  {name: {EN: 'rhyhorn',      FR: 'rhinocorne'},    types: ['ground', 'rock'],              evolutionsIndex: [111, 112, 464]},
 /*0112*/  {name: {EN: 'rhydon',       FR: 'rhinoféros'},    types: ['ground', 'rock']},
 /*0113*/  {name: {EN: 'chansey',      FR: 'leveinard'},     types: ['normal'],                      evolutionsIndex: [440, 113, 242]},
@@ -337,18 +341,85 @@ export const pokemonList = [
 
 /*0145*/  {name: {EN: 'zapdos',       FR: 'électhor'},      types: ['electric', 'flying'],
             variants: [
-                {imgVariantIndex: 10170, regionName: 'galar', types: ['fighting', 'flying']}
-              ]},
+                  {imgVariantIndex: 10170, regionName: 'galar', types: ['fighting', 'flying']}
+                ]},
 
 /*0146*/  {name: {EN: 'moltres',      FR: 'sulfura'},       types: ['fire', 'flying'],
             variants: [
-                {imgVariantIndex: 10171, regionName: 'galar', types: ['dark', 'flying']}
-              ]},
+                  {imgVariantIndex: 10171, regionName: 'galar', types: ['dark', 'flying']}
+                ]},
+
 /*0147*/  {name: {EN: 'dratini',      FR: 'minidraco'},     types: ['dragon'],                      evolutionsIndex: [147, 148, 149]},
 /*0148*/  {name: {EN: 'dragonair',    FR: 'draco'},         types: ['dragon']},
 /*0149*/  {name: {EN: 'dragonite',    FR: 'dracolosse'},    types: ['dragon', 'flying']},
 /*0150*/  {name: {EN: 'mewtwo',       FR: 'mewtwo'},        types: ['psychic'],                     evolutionsIndex: [151, 150]},
 /*0151*/  {name: {EN: 'mew',          FR: 'mew'},           types: ['psychic']},
+
+//gen2
+/*0152*/  {name: {EN: 'chikorita',    FR: 'germignon'},     types: ['grass'],                       evolutionsIndex: [152, 153, 154]},
+/*0153*/  {name: {EN: 'bayleef',      FR: 'macronium'},     types: ['grass']},
+/*0154*/  {name: {EN: 'meganium',     FR: 'méganium'},      types: ['grass']},
+/*0155*/  {name: {EN: 'cyndaquil',    FR: 'héricendre'},    types: ['fire'],                        evolutionsIndex: [155, 156, 157]},
+/*0156*/  {name: {EN: 'quilava',      FR: 'feurisson'},     types: ['fire']},
+
+/*0157*/  {name: {EN: 'typhlosion',   FR: 'typhlosion'},    types: ['fire'],
+            variants: [
+                  {imgVariantIndex: 10233, regionName: 'hisui', types: ['fire', 'ghost'],
+                  followEvolution: false}
+                ]},
+
+/*0158*/  {name: {EN: 'totodile',     FR: 'kaiminus'},      types: ['water'],                       evolutionsIndex: [158, 159, 160]},
+/*0159*/  {name: {EN: 'croconaw',     FR: 'crocodil'},      types: ['water']},
+/*0160*/  {name: {EN: 'feraligatr',   FR: 'aligatueur'},    types: ['water']},
+/*0161*/  {name: {EN: 'sentret',      FR: 'fouinette'},     types: ['normal'],                      evolutionsIndex: [161, 162]},
+/*0162*/  {name: {EN: 'furret',       FR: 'fouinar'},       types: ['normal']},
+/*0163*/  {name: {EN: 'hoothoot',     FR: 'hoothoot'},      types: ['normal', 'flying'],            evolutionsIndex: [163, 164]},
+/*0164*/  {name: {EN: 'noctowl',      FR: 'noarfang'},      types: ['normal', 'flying']},
+/*0165*/  {name: {EN: 'ledyba',       FR: 'coxy'},          types: ['bug', 'flying'],               evolutionsIndex: [165, 166]},
+/*0166*/  {name: {EN: 'ledian',       FR: 'coxyclaque'},    types: ['bug', 'flying']},
+/*0167*/  {name: {EN: 'spinarak',     FR: 'mimigal'},       types: ['bug', 'poison'],               evolutionsIndex: [167, 168]},
+/*0168*/  {name: {EN: 'ariados',      FR: 'migalos'},       types: ['bug', 'poison']},
+/*0169*/  {name: {EN: 'crobat',       FR: 'nostenfer'},     types: ['poison', 'flying']},
+/*0170*/  {name: {EN: 'chichou',      FR: 'loupio'},        types: ['water', 'electric'],           evolutionsIndex: [170, 171]},
+/*0171*/  {name: {EN: 'lanturn',      FR: 'lanturn'},       types: ['water', 'electric']},
+/*0172*/  {name: {EN: 'pichu',        FR: 'pichu'},         types: ['electric']},
+/*0173*/  {name: {EN: 'cleffa',       FR: 'mélo'},          types: ['fairy']},
+/*0174*/  {name: {EN: 'igglypuff',    FR: 'toudoudou'},     types: ['normal', 'fairy']},
+/*0175*/  {name: {EN: 'togepi',       FR: 'togepi'},        types: ['fairy'],                       evolutionsIndex: [175, 176, 468]},
+/*0176*/  {name: {EN: 'togetic',      FR: 'togetic'},       types: ['fairy', 'flying']},
+/*0177*/  {name: {EN: 'natu',         FR: 'natu'},          types: ['psychic', 'flying'],           evolutionsIndex: [177, 178]},
+/*0178*/  {name: {EN: 'xatu',         FR: 'xatu'},          types: ['psychic', 'flying']},
+/*0179*/  {name: {EN: 'mareep',       FR: 'wattouat'},      types: ['electric'],                    evolutionsIndex: [179, 180, 181]},
+/*0180*/  {name: {EN: 'flaaffy',      FR: 'lainergie'},     types: ['electric']},
+/*0181*/  {name: {EN: 'ampharos',     FR: 'pharamp'},       types: ['electric']},
+/*0182*/  {name: {EN: 'bellossom',    FR: 'joliflor'},      types: ['grass']},
+/*0183*/  {name: {EN: 'marill',       FR: 'marill'},        types: ['water', 'fairy'],              evolutionsIndex: [298, 183, 184]},
+/*0184*/  {name: {EN: 'azumarill',    FR: 'azumarill'},     types: ['water', 'fairy']},
+/*0185*/  {name: {EN: 'sudowooko',    FR: 'simularbre'},    types: ['rock'],                        evolutionsIndex: [438, 185]},
+/*0186*/  {name: {EN: 'politoed',     FR: 'tarpaud'},       types: ['water']},
+/*0187*/  {name: {EN: 'hoppip',       FR: 'granivol'},      types: ['grass', 'flying'],             evolutionsIndex: [187, 188, 189]},
+/*0188*/  {name: {EN: 'skiploom',     FR: 'floravol'},      types: ['grass', 'flying']},
+/*0189*/  {name: {EN: 'jumluff',      FR: 'cotovol'},       types: ['grass', 'flying']},
+/*0190*/  {name: {EN: 'aipom',        FR: 'capumain'},      types: ['normal'],                      evolutionsIndex: [190, 424]},
+/*0191*/  {name: {EN: 'sunkern',      FR: 'tournegrin'},    types: ['grass'],                       evolutionsIndex: [191, 192]},
+/*0192*/  {name: {EN: 'sunflora',     FR: 'héliatronc'},    types: ['grass']},
+/*0193*/  {name: {EN: 'yamma',        FR: 'yamma'},         types: ['bug', 'flying'],               evolutionsIndex: [193, 469]},
+
+/*0194*/  {name: {EN: 'wooper',       FR: 'axoloto'},       types: ['water', 'ground'],             evolutionsIndex: [194, 195],
+          variants: [
+                {imgVariantIndex: 10253, regionName: 'paldea', types: ['poison', 'ground'],
+                evolutionsIndex: [194, 980]}
+              ]},
+/*0195*/  {name: {EN: 'quagsire',     FR: 'maraiste'},      types: ['water', 'ground']},
+/*0196*/  {name: {EN: 'espeon',       FR: 'mentali'},       types: ['psychic']},
+/*0197*/  {name: {EN: 'umbreon',      FR: 'noctali'},       types: ['dark']},
+/*0198*/  {name: {EN: 'murkrow',      FR: 'cornèbre'},      types: ['dark', 'flying'],               evolutionsIndex: [198, 430]},
+
+/*0199*/  {name: {EN: 'slowking',     FR: 'roigada'},       types: ['water', 'psychic'],
+          variants: [
+                {imgVariantIndex: 10172, regionName: 'galar', types: ['poison', 'psychic']}
+              ]},
+/*0200*/  {name: {EN: 'misdreavus',   FR: 'feuforêve'},      types: ['ghost'],                       evolutionsIndex: [200, 429]},
 ];
 
 /*===================================================================================================*/
@@ -387,7 +458,6 @@ function BuildPokemonVariants (pokemon) {
   if (pokemon.variants){
     pokemon.variants.forEach((variant) => {
       variant.number = pokemon.number;
-      variant.name = {};
       variant.name['EN'] = regionalFormsNames[variant.regionName]['EN'] + ' ' + pokemon.name['EN'].charAt(0).toUpperCase() + pokemon.name['EN'].slice(1);
       variant.name['FR'] = pokemon.name['FR'] + ' ' + regionalFormsNames[variant.regionName]['FR'];
                       
@@ -400,8 +470,6 @@ function BuildPokemonVariants (pokemon) {
       if (pokemonGenderVariants.includes(variant.number)){
         variant.spriteFemaleSrc = spriteImgURLTemplate + 'female/' + variant.imgVariantIndex + imgSuffixTemplate;
       }
-
-      variant.isRegionalVariant = true;
 
       BuildPokemonTypes(variant);
     });
@@ -423,24 +491,68 @@ function BuildPokemonEvolutions (evolutionsTree) {
       delete pokemon.evolutionsIndex;
     }
     pokemon.evolutions = [];
-    pokemon.evolutions.actual = evolutionsTree.length - evolutionsTree.indexOf(parseInt(pokemon.number));
       
       evolutionsTree.forEach((index) => {
-        pokemon.evolutions.unshift({
+        pokemon.evolutions.push({
                                     evolutionIndex: index,
                                     name: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].name,
-                                    spriteSrc: spriteImgURLTemplate + index + '.png',
+                                    spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
                                     isOutOfRange: index > pokemonList.length -1
                                     }
         );
       });
+
+    if (pokemon.variants) {
+      pokemon.variants.forEach((variant) => {
+        variant.evolutions = [];
+        
+        if (variant.evolutionsIndex){
+          console.log(pokemon.name['FR'], 'not implemented yet');
+        } else if (variant.followEvolution === false){
+          evolutionsTree.forEach((index) => {
+            //if this is the variant
+            if (index <= pokemonList.length -1 && index == parseInt(pokemon.number)) {
+              variant.evolutions.push({
+                                        evolutionIndex: index,
+                                        name: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].name,
+                                        spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
+                                        isOutOfRange: index > pokemonList.length -1
+                                        }
+              );
+            } else {
+              variant.evolutions.push({
+                                        evolutionIndex: index,
+                                        name: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].name,
+                                        spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
+                                        isOutOfRange: index > pokemonList.length -1
+                                        }
+                );
+              }
+
+          });
+        } else { //default (follow parent's evolution tree but with regional variants)
+          variant.evolutions.actual = pokemon.evolutions.actual;
+
+          evolutionsTree.forEach((index) => {
+            variant.evolutions.push({
+                                        evolutionIndex: index,
+                                        name: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].name,
+                                        spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
+                                        isOutOfRange: index > pokemonList.length -1
+                                        }
+            );
+          });
+        }
+
+      });
+    }
+
   });
 }
 
 function BuildPokemonList (pokemonList) {
 
   pokemonList.forEach((pokemon) => {
-
     const pokemonNumber = pokemonList.indexOf(pokemon);
 
     if (pokemonNumber < 10){
@@ -450,6 +562,15 @@ function BuildPokemonList (pokemonList) {
     } else if (pokemonNumber < 1000){
       pokemon.number = '0' + pokemonNumber;
     }
+
+    if (pokemon.variants){
+      pokemon.variants.forEach((v) => {
+        v.name = {};
+      });
+    }
+  });
+
+  pokemonList.forEach((pokemon) => {
 
     BuildPokemonImages(pokemon);
 

@@ -49,6 +49,11 @@ strong.sectionTitle {
   text-decoration: underline;
 }
 
+p.pSubTitle {
+  font-size: 120%;
+  text-decoration: underline;
+}
+
 .topNav {
   display: flex;
   align-items: center;
@@ -112,9 +117,10 @@ strong.sectionTitle {
 
 .pokemonEvolutionsSelector {
   display: flex;
-  max-width: 85%;
-  overflow-x: auto;
+  border-radius: 0 0 5px 5px;
+  max-width: 60%;
   margin: 10px 10px 0 0;
+  overflow-x: auto;
 }
 
 .pokemonEvolutionsSelector img {
@@ -154,43 +160,40 @@ strong.sectionTitle {
 
 .pokemonDetailedDescription {
   background: rgba(25, 25, 25, 0.5);
-  font-weight: bold;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 30%;
   margin: 0 auto;
+  padding: 5px;
 }
 
 .pokemonDetailedDescription[open] {
   border-bottom: solid 2px;
   border-radius: 0 0 30px 30px;
   width: unset;
-  margin: unset;
+}
+
+.pokemonDetailedDescription summary {
+  font-weight: bold;
 }
 
 .pokemonDetailedDescription summary:hover {
   cursor: pointer;
 }
 
-.pokemonDetailedDescription div {
+.pokemonDetailedDescription>div {
   display: flex;
-  justify-content: space-evenly;
-  width: 80%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: auto;
   margin: 0 auto;
   padding: 10px 0;
 }
 
-.pokemonShinySection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+.pokemonSpritesSection img {
+  height: 96px;
+  width: 96px;
 }
 
 .pokemonShinySection img:first-child {
-  max-height: 250px;
-}
-
-.pokemonShinySection img:last-child {
-  margin-top: 0;
-  margin-bottom: auto;
+  max-height: 350px;
 }

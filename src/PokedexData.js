@@ -1,6 +1,7 @@
 const apiURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/"
 const mainImgURLTemplate = apiURL + "pokemon/other/official-artwork/"
 const spriteImgURLTemplate = apiURL + "pokemon/"
+const spriteBackImgURLTemplate = spriteImgURLTemplate + "back/"
 const typeImgURLTemplate = apiURL + "types/generation-viii/legends-arceus/"
 const imgSuffixTemplate = ".png"
 
@@ -222,7 +223,7 @@ export const pokemonList = [
 
 /*0081*/  {name: {EN: 'magnemite',    FR: 'magnéti'},       types: ['electric', 'steel'],         evolutionsIndex: [81, 82, 462]},
 /*0082*/  {name: {EN: 'magneton',     FR: 'magnéton'},      types: ['electric', 'steel']},
-/*0083*/  {name: {EN: 'farfetch\'d',  FR:  'canarticho'},   types: ['normal', 'flying'],
+/*0083*/  {name: {EN: 'farfetch\'d',  FR:  'canarticho'},   types: ['normal', 'flying'],          evolutionsIndex: [83],
           variants: [
                 {imgVariantIndex: 10166, regionName: 'galar', types: ['fighting'],
                 evolutionsIndex: [83, 865]}
@@ -438,11 +439,15 @@ function BuildPokemonImages (pokemon) {
   }
 
   pokemon.imgSrc.sprites.regular = spriteImgURLTemplate + pokemonNumber + imgSuffixTemplate;
+  pokemon.imgSrc.sprites.regularBack = spriteBackImgURLTemplate + pokemonNumber + imgSuffixTemplate;
   pokemon.imgSrc.sprites.shiny = spriteImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
+  pokemon.imgSrc.sprites.shinyBack = spriteBackImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
 
   if (pokemonGenderVariants.includes(pokemonNumber)){
     pokemon.imgSrc.sprites.regularFemale = spriteImgURLTemplate + 'female/' + pokemonNumber + imgSuffixTemplate;
+    pokemon.imgSrc.sprites.regularBackFemale = spriteBackImgURLTemplate + 'female/' + pokemonNumber + imgSuffixTemplate;
     pokemon.imgSrc.sprites.shinyFemale = spriteImgURLTemplate + 'shiny/female/' + pokemonNumber + imgSuffixTemplate;
+    pokemon.imgSrc.sprites.shinyBackFemale = spriteBackImgURLTemplate + 'shiny/female/' + pokemonNumber + imgSuffixTemplate;
   }
 }
 
@@ -465,10 +470,12 @@ function BuildPokemonVariants (pokemon) {
       variant.imgSrc = {sprites: {}};
       variant.imgSrc.artwork = mainImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
       variant.imgSrc.sprites.regular = spriteImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
+      variant.imgSrc.sprites.regularBack = spriteBackImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
       delete variant.imgVariantIndex;
 
       if (pokemonGenderVariants.includes(variant.number)){
         variant.imgSrc.sprites.regularFemale = spriteImgURLTemplate + 'female/' + variant.imgVariantIndex + imgSuffixTemplate;
+        variant.imgSrc.sprites.regularBackFemale = spriteBackImgURLTemplate + 'female/' + variant.imgVariantIndex + imgSuffixTemplate;
       }
 
       BuildPokemonTypes(variant);

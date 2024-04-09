@@ -519,9 +519,10 @@ function BuildPokemonEvolutions (evolutionsTree) {
             :
             index;
             variantEvolutionsTree.push({
-                                        evolutionsIndex: index,
+                                        evolutionIndex: index,
                                         name: evolutionName,
                                         spriteSrc: spriteImgURLTemplate + spriteNumber + imgSuffixTemplate,
+                                        isOutOfRange: index > pokemonList.length -1
                                         }
             );
           });
@@ -537,7 +538,7 @@ function BuildPokemonEvolutions (evolutionsTree) {
           });
           
           delete variant.evolutionsIndex;
-          
+
         }//specific evolution tree
 
         else if (variant.followEvolution === false){//only this evolution is a regional variant

@@ -431,7 +431,7 @@ function BuildPokemonImages (pokemon) {
   const pokemonNumber = parseInt(pokemon.number);
   pokemon.imgSrc = {sprites: {}};
 
-  if (pokemon.name[0] === 'missingNo.'){
+  if (pokemonList.indexOf(pokemon) === 0){
     pokemon.imgSrc.artwork = "https://wiki.p-insurgence.com/images/0/09/722.png";
   } else {
     pokemon.imgSrc.artwork = mainImgURLTemplate + pokemonNumber + imgSuffixTemplate;

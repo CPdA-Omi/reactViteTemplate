@@ -184,14 +184,17 @@ p.pSubTitle {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: auto;
   margin: 0 auto;
   padding: 10px 0;
 }
 
 .pokemonSpritesSection img {
-  height: 96px;
-  width: 96px;
+  font-size: 60%;
+}
+
+.pokemonSpritesSection img {
+  height: 126px;
+  width: 126px;
 }
 
 .pokemonShinySection img:first-child {

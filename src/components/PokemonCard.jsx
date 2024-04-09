@@ -32,19 +32,19 @@ function PokemonCard({
 				}
 				<div className="pokemonEvolutionsSelector">
 					{currentPokemon.evolutions ?
-						<>
+					<>
 						{currentPokemon.evolutions.map((evolution) => (
 							<img key={evolution.spriteSrc + 'Evolution'/*have to be replaced later by "name[language].toLowerCase()"*/}
 							onClick={() => handleClickIndex(evolution.isOutOfRange ? parseInt(currentPokemon.number) : evolution.evolutionIndex)}
 							title={evolution.name[language].charAt(0).toUpperCase() + evolution.name[language].slice(1)}
 							src={evolution.spriteSrc} alt={evolution.name['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 						))}
-						</>
+					</>
 					:
-						<>
-						<img title={evolution.name[language].charAt(0).toUpperCase() + evolution.name[language].slice(1)}
+					<>
+						<img title={currentPokemon.name[language].charAt(0).toUpperCase() + currentPokemon.name[language].slice(1)}
 						src={currentPokemon.imgSrc.sprites.regular} alt={currentPokemon.name['EN'].toLowerCase() + 'Sprite'}/>
-						</>
+					</>
 					}
 				</div>
 			</div>
@@ -64,6 +64,8 @@ function PokemonCard({
 				</div>
 			</div>
 
+			{parseInt(currentPokemon.number) !== 0 ?
+
 			<details className="pokemonDetailedDescription">
 				<summary accessKey="d">{(language === 'EN' ? 'View more' : 'Voir plus') + '...'}</summary>
 				{currentPokemon.imgSrc.shinyArtwork ?
@@ -76,6 +78,7 @@ function PokemonCard({
 				</section>
 				:
 				<></>}
+				
 				<strong className="sectionTitle">Sprites</strong>
 				<section className="pokemonSpritesSection">
 					<div>
@@ -120,6 +123,8 @@ function PokemonCard({
 					</div>
 				</section>
 			</details>
+			:
+			<></>}
 
 		</section>
 	);

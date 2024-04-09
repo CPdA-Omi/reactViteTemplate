@@ -428,29 +428,29 @@ export const pokemonList = [
 
 function BuildPokemonImages (pokemon) {
   const pokemonNumber = parseInt(pokemon.number);
+  pokemon.imgSrc = {sprites: {}};
 
   if (pokemon.name[0] === 'missingNo.'){
-      pokemon.imgSrc = "https://wiki.p-insurgence.com/images/0/09/722.png";
-      pokemon.imgShinySrc = "";
-    } else {
-      pokemon.imgSrc = mainImgURLTemplate + pokemonNumber + imgSuffixTemplate;
-      pokemon.imgShinySrc = mainImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
-    }
+    pokemon.imgSrc.artwork = "https://wiki.p-insurgence.com/images/0/09/722.png";
+  } else {
+    pokemon.imgSrc.artwork = mainImgURLTemplate + pokemonNumber + imgSuffixTemplate;
+    pokemon.imgSrc.shinyArtwork = mainImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
+  }
 
-    pokemon.spriteSrc = spriteImgURLTemplate + pokemonNumber + imgSuffixTemplate;
-    pokemon.spriteShinySrc = spriteImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
+  pokemon.imgSrc.sprites.regular = spriteImgURLTemplate + pokemonNumber + imgSuffixTemplate;
+  pokemon.imgSrc.sprites.shiny = spriteImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
 
-    if (pokemonGenderVariants.includes(pokemonNumber)){
-      pokemon.spriteFemaleSrc = spriteImgURLTemplate + 'female/' + pokemonNumber + imgSuffixTemplate;
-      pokemon.spriteFemaleShinySrc = spriteImgURLTemplate + 'shiny/female/' + pokemonNumber + imgSuffixTemplate;
-    }
+  if (pokemonGenderVariants.includes(pokemonNumber)){
+    pokemon.imgSrc.sprites.regularFemale = spriteImgURLTemplate + 'female/' + pokemonNumber + imgSuffixTemplate;
+    pokemon.imgSrc.sprites.shinyFemale = spriteImgURLTemplate + 'shiny/female/' + pokemonNumber + imgSuffixTemplate;
+  }
 }
 
 function BuildPokemonTypes (pokemon) {
-  pokemon.typesImgSrc = [];
+  pokemon.imgSrc.types = [];
   
   pokemon.types.forEach((type) => {
-    pokemon.typesImgSrc.push(typeImgURLTemplate + pokemonTypes.indexOf(type) + imgSuffixTemplate);
+    pokemon.imgSrc.types.push(typeImgURLTemplate + pokemonTypes.indexOf(type) + imgSuffixTemplate);
   });
 }
 
@@ -460,15 +460,15 @@ function BuildPokemonVariants (pokemon) {
       variant.number = pokemon.number;
       variant.name['EN'] = regionalFormsNames[variant.regionName]['EN'] + ' ' + pokemon.name['EN'].charAt(0).toUpperCase() + pokemon.name['EN'].slice(1);
       variant.name['FR'] = pokemon.name['FR'] + ' ' + regionalFormsNames[variant.regionName]['FR'];
-                      
       delete variant.regionName;
 
-      variant.imgSrc = mainImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
-      variant.spriteSrc = spriteImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
+      variant.imgSrc = {sprites: {}};
+      variant.imgSrc.artwork = mainImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
+      variant.imgSrc.sprites.regular = spriteImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
       delete variant.imgVariantIndex;
 
       if (pokemonGenderVariants.includes(variant.number)){
-        variant.spriteFemaleSrc = spriteImgURLTemplate + 'female/' + variant.imgVariantIndex + imgSuffixTemplate;
+        variant.imgSrc.sprites.regularFemale = spriteImgURLTemplate + 'female/' + variant.imgVariantIndex + imgSuffixTemplate;
       }
 
       BuildPokemonTypes(variant);
@@ -582,7 +582,7 @@ function BuildPokemonEvolutions (evolutionsTree) {
     }
 
   });
-}
+}//BuildPokemonEvolutions
 
 function BuildPokemonList (pokemonList) {
 
@@ -624,3 +624,4 @@ function BuildPokemonList (pokemonList) {
 /*===================================================================================================*/
 
 BuildPokemonList(pokemonList);
+

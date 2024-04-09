@@ -494,11 +494,11 @@ function BuildPokemonEvolutions (evolutionsTree) {
       
       evolutionsTree.forEach((index) => {
         pokemon.evolutions.push({
-                                    evolutionIndex: index,
-                                    name: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].name,
-                                    spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
-                                    isOutOfRange: index > pokemonList.length -1
-                                    }
+                                evolutionIndex: index,
+                                name: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].name,
+                                spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
+                                isOutOfRange: index > pokemonList.length -1
+                                }
         );
       });
 
@@ -506,40 +506,73 @@ function BuildPokemonEvolutions (evolutionsTree) {
       pokemon.variants.forEach((variant) => {
         variant.evolutions = [];
         
-        if (variant.evolutionsIndex){
-          console.log(pokemon.name['FR'], 'not implemented yet');
-        } else if (variant.followEvolution === false){
+        if (variant.evolutionsIndex){ //specific evolution tree
+          const variantEvolutionsTree = [];
+          variant.evolutionsIndex.forEach((index) => { //foreach pokemon of the evolution tree (build of the evolution tree)
+            const evolutionName = index <= pokemonList.length -1 && pokemonList[index].variants ? //if the pokemon is in the main table and have regional variants
+            pokemonList[index].variants[pokemonList[index].variants.length -1].name //name of the last variant of the pokemon;
+            :
+            index > pokemonList.length -1 ? errorsDefinitions['missingPokemon'] : pokemonList[index].name;
+
+            const spriteNumber = index <= pokemonList.length -1 && pokemonList[index].variants ? //if the pokemon is in the main table and have regional variants
+            pokemonList[index].variants[pokemonList[index].variants.length -1].imgVariantIndex //imgVariantIndex of the last variant of the pokemon
+            :
+            index;
+            variantEvolutionsTree.push({
+                                        evolutionsIndex: index,
+                                        name: evolutionName,
+                                        spriteSrc: spriteImgURLTemplate + spriteNumber + imgSuffixTemplate,
+                                        }
+            );
+          });
+
+          variant.evolutionsIndex.forEach((index) => { //foreach pokemon of the evolution tree (assignation of the evolution tree)
+            if (index <= pokemonList.length -1) { //if the pokemon is in the main table
+              if (pokemonList[index].variants) { //if the pokemon have a variant, the evolution tree is assigned to its last variant
+                pokemonList[index].variants[pokemonList[index].variants.length -1].evolutions = variantEvolutionsTree;
+              } else {
+                pokemonList[index].evolutions = variantEvolutionsTree;
+              }
+            }
+          });
+          
+          delete variant.evolutionsIndex;
+          
+        }//specific evolution tree
+
+        else if (variant.followEvolution === false){//only this evolution is a regional variant
           evolutionsTree.forEach((index) => {
-            //if this is the variant
+            //if this is THE variant
             if (index <= pokemonList.length -1 && index == parseInt(pokemon.number)) {
               variant.evolutions.push({
-                                        evolutionIndex: index,
-                                        name: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].name,
-                                        spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
-                                        isOutOfRange: index > pokemonList.length -1
-                                        }
+                                      evolutionIndex: index,
+                                      name: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].name,
+                                      spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
+                                      isOutOfRange: index > pokemonList.length -1
+                                      }
               );
             } else {
               variant.evolutions.push({
-                                        evolutionIndex: index,
-                                        name: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].name,
-                                        spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
-                                        isOutOfRange: index > pokemonList.length -1
-                                        }
+                                      evolutionIndex: index,
+                                      name: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].name,
+                                      spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
+                                      isOutOfRange: index > pokemonList.length -1
+                                      }
                 );
               }
 
           });
+
         } else { //default (follow parent's evolution tree but with regional variants)
           variant.evolutions.actual = pokemon.evolutions.actual;
 
           evolutionsTree.forEach((index) => {
             variant.evolutions.push({
-                                        evolutionIndex: index,
-                                        name: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].name,
-                                        spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
-                                        isOutOfRange: index > pokemonList.length -1
-                                        }
+                                    evolutionIndex: index,
+                                    name: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].name,
+                                    spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
+                                    isOutOfRange: index > pokemonList.length -1
+                                    }
             );
           });
         }

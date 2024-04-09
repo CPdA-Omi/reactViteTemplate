@@ -67,7 +67,7 @@ function PokemonCard({
 				<summary accessKey="d">{(language === 'EN' ? 'View more' : 'Voir plus') + '...'}</summary>
 				{currentPokemon.imgShinySrc ?
 				<section className="pokemonShinySection">
-					<strong className="sectionTitle">{language === 'EN' ? 'Shiny variant' : 'Version Shiny'}</strong>
+					<strong className="sectionTitle">{language === 'EN' ? 'Shiny' : 'Chromatique'}</strong>
 					<div>
 						<img src={currentPokemon.imgShinySrc} alt={currentPokemon.name[language].toLowerCase() + 'ShinyArtwork'}/>
 						<img src={currentPokemon.spriteShinySrc} alt={currentPokemon.name[language].toLowerCase() + 'ShinySprite'}/>
@@ -77,7 +77,7 @@ function PokemonCard({
 				<p></p>}
 				{currentPokemon.spriteFemaleSrc ?
 				<section className="pokemonFemaleSection">
-					<strong className="sectionTitle">{language === 'EN' ? 'Female variant' : 'Version femelle'}</strong>
+					<strong className="sectionTitle">{language === 'EN' ? 'Female' : 'Femelle'}</strong>
 					<div>
 						<img src={currentPokemon.spriteFemaleSrc} title='Female Sprite' alt={currentPokemon.name[language].toLowerCase().replace(/\s/g, '') + 'FemaleSprite'}/>
 

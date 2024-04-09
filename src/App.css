@@ -100,10 +100,6 @@ p.pSubTitle {
   margin: 0;
 }
 
-.pokemonCardTopNavigation img:hover {
-  cursor: pointer;
-}
-
 .pokemonRegionalVariantsSelector {
   display: flex;
   flex-wrap: wrap;
@@ -111,8 +107,28 @@ p.pSubTitle {
   margin-left: 10px;
 }
 
+.pokemonRegionalVariantsSelector img:hover,
+.pokemonEvolutionsSelector img.clickableImage:hover {
+  cursor: pointer;
+}
+
 .pokemonRegionalVariantsSelector img {
   height: 60px;
+}
+
+.tooMuchVariantsSelector {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 10px;
+}
+
+.tooMuchVariantsSelector select {
+  background: rgba(25, 25, 25, 0.5);
+  border-radius: 10px;
+  height: 50px;
+  margin: 0 auto;
+  padding: 5px;
 }
 
 .pokemonEvolutionsSelector {
@@ -130,7 +146,14 @@ p.pSubTitle {
 
 
 .pokemonArtwork {
+  width: 494px;
+  height: 474px;
   margin: 0 10px;
+}
+
+.pokemonArtwork img {
+  max-width: 475px;
+  max-height: 475px;
 }
 
 .pokemonName,
@@ -193,8 +216,8 @@ p.pSubTitle {
 }
 
 .pokemonSpritesSection img {
-  height: 126px;
-  width: 126px;
+  height: 120px;
+  width: 120px;
 }
 
 .pokemonShinySection img:first-child {

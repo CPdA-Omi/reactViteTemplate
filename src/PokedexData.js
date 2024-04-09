@@ -421,6 +421,7 @@ export const pokemonList = [
                 {imgVariantIndex: 10172, regionName: 'galar', types: ['poison', 'psychic']}
               ]},
 /*0200*/  {name: {EN: 'misdreavus',   FR: 'feuforêve'},      types: ['ghost'],                       evolutionsIndex: [200, 429]},
+/*0201*/  {name: {EN: 'unown',        FR: 'zarbi'},          types: ['psychic']},
 ];
 
 /*===================================================================================================*/
@@ -591,6 +592,36 @@ function BuildPokemonEvolutions (evolutionsTree) {
   });
 }//BuildPokemonEvolutions
 
+function BuildUnown () {
+  if (pokemonList.length -1 >= 201){
+    const unown = pokemonList[201];
+    const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    letters.push('exclamation');
+    letters.push('question');
+
+    unown.variants = [];
+    letters.forEach((c) => {
+      const shape = letters.indexOf(c) === letters.length -2 ? '!' : letters.indexOf(c) === letters.length -1 ? '?' : c.toUpperCase();
+      unown.variants.push(
+                          {
+                            selectorName: {EN: shape + ' shape', FR: 'forme ' + shape},
+                            name: {EN: 'unown - ' + shape, FR: 'zarbi - ' + shape},
+                            number: unown.number,
+                            imgSrc: {artwork: 'https://img.pokemondb.net/artwork/vector/large/unown-' + c + imgSuffixTemplate,
+                                    sprites: {regular: spriteImgURLTemplate + '201-' + c + imgSuffixTemplate,
+                                              regularBack: spriteBackImgURLTemplate + '201-' + c + imgSuffixTemplate,
+                                              shiny: spriteImgURLTemplate + 'shiny/201-' + c + imgSuffixTemplate,
+                                              shinyBack: spriteBackImgURLTemplate + 'shiny/201-' + c + imgSuffixTemplate
+                                            },
+                                    types: unown.imgSrc.types
+                                    },
+                            types: unown.types
+                          }
+      );
+    });
+  }
+}
+
 function BuildPokemonList (pokemonList) {
 
   pokemonList.forEach((pokemon) => {
@@ -632,3 +663,4 @@ function BuildPokemonList (pokemonList) {
 
 BuildPokemonList(pokemonList);
 
+BuildUnown();

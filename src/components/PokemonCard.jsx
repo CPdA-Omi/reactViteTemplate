@@ -5,17 +5,17 @@ function PokemonCard({
 }){
 
 	let currentPokemon = '';
-	if (pokemonVariant === -1){
+	if (parseInt(pokemonVariant) === -1){
 		currentPokemon = pokemon;
 	} else {
 		currentPokemon = pokemon.variants[pokemonVariant];
 	}
 
 	return(
-		<section className={'pokemonCard ' + currentPokemon.types[0] + 'Type'}>
+		<article className={'pokemonCard ' + currentPokemon.types[0] + 'Type'}>
 
-			<div className="pokemonCardTopNavigation">
-				{pokemon.variants ?
+			<section className="pokemonCardTopNavigation">
+				{pokemon.variants && pokemon.variants.length < 3 ?
 				<div className="pokemonRegionalVariantsSelector">
 					<img onClick={() => handleClickVariant(-1)}
 						title={pokemon.name[language].charAt(0).toUpperCase() + pokemon.name[language].slice(1)}
@@ -27,6 +27,19 @@ function PokemonCard({
 						src={variant.imgSrc.sprites.regular} alt={variant.name['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 					))}
 				</div>
+				: pokemon.variants && pokemon.variants.length >= 3 ?
+					<div className="tooMuchVariantsSelector">
+						<select onChange={e => handleClickVariant(e.target.value)}
+						name="tooMuchVariantsSelector" id="too-Much-Variants-Selector">
+							<option value='-1'>{pokemon.name[language].charAt(0).toUpperCase() + pokemon.name[language].slice(1)}</option>
+							{pokemon.variants.map((v, i) => (
+								<option key={pokemon.name['EN'] + pokemon.variants.indexOf(v) + 'Form'}
+								value={pokemon.variants.indexOf(v)}>
+								{v.selectorName[language].charAt(0).toUpperCase() + v.selectorName[language].slice(1)}
+								</option>
+							))}
+						</select>
+					</div>
 				:
 				<div className="placeHolderDivBecauseThereIsNoRegionalVariantsHere"></div>
 				}
@@ -37,6 +50,7 @@ function PokemonCard({
 							<img key={evolution.spriteSrc + 'Evolution'/*have to be replaced later by "name[language].toLowerCase()"*/}
 							onClick={() => handleClickIndex(evolution.isOutOfRange ? parseInt(currentPokemon.number) : evolution.evolutionIndex)}
 							title={evolution.name[language].charAt(0).toUpperCase() + evolution.name[language].slice(1)}
+							className="clickableImage"
 							src={evolution.spriteSrc} alt={evolution.name['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 						))}
 					</>
@@ -47,10 +61,10 @@ function PokemonCard({
 					</>
 					}
 				</div>
-			</div>
+			</section>
 
 			<figure className="pokemonArtwork">
-				<img src={currentPokemon.imgSrc.artwork} alt={currentPokemon.name[language].toLowerCase() + 'Artwork'}/>
+				<img src={currentPokemon.imgSrc.artwork} alt={currentPokemon.name[language].toLowerCase().replace(/\s/g, '') + 'Artwork'}/>
 			</figure>
 
 			<div className="pokemonDescription">
@@ -71,14 +85,14 @@ function PokemonCard({
 				{currentPokemon.imgSrc.shinyArtwork ?
 				<section className="pokemonShinySection">
 					<strong className="sectionTitle">{language === 'EN' ? 'Shiny' : 'Chromatique'}</strong>
-					<div>
-						<img title={(language === 'EN' ? 'Shiny ' : '') + currentPokemon.name[language].charAt(0).toUpperCase() + currentPokemon.name[language].slice(1) + (language === 'FR' ? ' chromatique ' : '')}
-						src={currentPokemon.imgSrc.shinyArtwork} alt={currentPokemon.name['EN'].toLowerCase() + 'ShinyArtwork'}/>
-					</div>
+					<figure>
+						<img src={currentPokemon.imgSrc.shinyArtwork} alt={currentPokemon.name['EN'].toLowerCase() + 'ShinyArtwork'}/>
+						<figcaption>{(language === 'EN' ? 'Shiny ' : '') + currentPokemon.name[language].charAt(0).toUpperCase() + currentPokemon.name[language].slice(1) + (language === 'FR' ? ' chromatique ' : '')}</figcaption>
+					</figure>
 				</section>
 				:
 				<></>}
-				
+
 				<strong className="sectionTitle">Sprites</strong>
 				<section className="pokemonSpritesSection">
 					<div>
@@ -90,7 +104,7 @@ function PokemonCard({
 							src={currentPokemon.imgSrc.sprites.regularBack} 
 							alt={currentPokemon.name['EN'].toLowerCase().replace(/\s/g, '') + 'BackSprite'}/>
 
-							{pokemonVariant === -1 ?
+							{pokemonVariant === -1 || parseInt(pokemon.number) === 201 ?
 							<>
 							<img title={language === 'EN' ? 'Shiny Sprite' : 'Sprite chromatique'}
 							src={currentPokemon.imgSrc.sprites.shiny}
@@ -126,7 +140,7 @@ function PokemonCard({
 			:
 			<></>}
 
-		</section>
+		</article>
 	);
 }
 

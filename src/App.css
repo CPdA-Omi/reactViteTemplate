@@ -162,8 +162,12 @@ p.pSubTitle {
   margin: 0px auto;
 }
 
+.pokemonRoomajiName {
+  margin: 0;
+}
+
 .pokemonName {
-  font-size: 50px;
+  font-size: 45px;
 }
 
 .pokemonNumber {

@@ -1,26 +1,24 @@
 import { useState } from 'react'
 import './App.css'
 import './Types.css'
+
 import { pokemonList } from './PokedexData.js'
 
 import SettingsMenu from './components/SettingsMenu.jsx'
 import PokemonCard from './components/PokemonCard.jsx'
 import NavBar from './components/NavBar.jsx'
 
+const languages = ['EN', 'FR', 'DE', 'JA'];
+
 function App() {
-
-  /*useState(() => {
-    alert('Hello Pokemon trainer :)');
-    }
-  );*/
-
+  
   const [language, setLanguage] = useState('EN');
 
   const handleClickLanguageSwitch = () => {
-    if (language === 'EN'){
-      setLanguage('FR');
+    if (languages.indexOf(language) !== languages.length -1){
+      setLanguage(languages[languages.indexOf(language) + 1]);
     } else {
-      setLanguage('EN');
+      setLanguage(languages[0]);
     }
   }
 
@@ -32,7 +30,7 @@ function App() {
     }
   }
 
-  const [pokemonIndex, setPokemonIndex] = useState(1);
+  const [pokemonIndex, setPokemonIndex] = useState(0);
 
   const handleClickDecrement = () => {
     if (pokemonIndex > 1){
@@ -60,6 +58,11 @@ function App() {
       setPokemonIndex(index);
     }
   }
+
+  useState(() => {
+    setPokemonIndex(1);
+    }
+  );
 
   return (
     <>

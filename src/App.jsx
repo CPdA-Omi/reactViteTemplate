@@ -8,6 +8,7 @@ import SettingsMenu from './components/SettingsMenu.jsx'
 import PokemonCard from './components/PokemonCard.jsx'
 import NavBar from './components/NavBar.jsx'
 
+const defaultPokemonDisplayed = 1;
 const languages = ['EN', 'FR', 'DE', 'JA'];
 
 function App() {
@@ -51,16 +52,18 @@ function App() {
   }
 
   const handleClickIndex = (index) => {
-    if (pokemonIndex !== index){
-      if (!pokemonList[index].variants || (pokemonList[index].variants.length)-1 < pokemonVariant){
-        setPokemonVariant(-1);
-      }
-      setPokemonIndex(index);
+    if (index === undefined){
+      index = pokemonIndex;
     }
+
+    if (!pokemonList[index].variants || (pokemonList[index].variants.length)-1 < pokemonVariant){
+      setPokemonVariant(-1);
+    }
+    setPokemonIndex(index);
   }
 
   useState(() => {
-    setPokemonIndex(1);
+    setPokemonIndex(defaultPokemonDisplayed);
     }
   );
 
@@ -81,6 +84,8 @@ function App() {
         />
       </div>
 
+      {pokemonList[defaultPokemonDisplayed].names !== undefined &&
+        pokemonList[defaultPokemonDisplayed].types !== undefined ?
       <PokemonCard
       pokemon={pokemonList[pokemonIndex]}
       language={language}
@@ -88,8 +93,10 @@ function App() {
       pokemonVariant={pokemonVariant}
       handleClickVariant={handleClickVariant}
       />
+      :''
+      }
     </>
-  )
+  );
 }
 
 export default App

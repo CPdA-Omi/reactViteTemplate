@@ -48,7 +48,7 @@ function PokemonCard({
 					<>
 						{currentPokemon.evolutions.map((evolution) => (
 							<img key={evolution.spriteSrc + 'Evolution'/*have to be replaced later by "names[language].toLowerCase()"*/}
-							onClick={() => handleClickIndex(evolution.isOutOfRange ? parseInt(currentPokemon.number) : evolution.evolutionIndex)}
+							onClick={() => handleClickIndex(evolution.isOutOfRange ? undefined : evolution.evolutionIndex)}
 							title={evolution.names[language].charAt(0).toUpperCase() + evolution.names[language].slice(1)}
 							className="clickableImage"
 							src={evolution.spriteSrc} alt={evolution.names['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>

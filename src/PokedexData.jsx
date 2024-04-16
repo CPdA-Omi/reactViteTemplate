@@ -579,13 +579,16 @@ function BuildPokemonEvolutions (evolutionsTree) {
     pokemon.evolutions = [];
       
       evolutionsTree.forEach((index) => {
+        axios
+        .get('https://pokeapi.co/api/v2/pokemon/' + index)
+        .then((response) => {
         pokemon.evolutions.push({
                                 evolutionIndex: index,
                                 names: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].names,
-                                spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
+                                spriteSrc: response.data.sprites['front_default'],
                                 isOutOfRange: index > pokemonList.length -1
-                                }
-        );
+                                });
+        });
       });
 
     if (pokemon.variants) {
@@ -604,13 +607,16 @@ function BuildPokemonEvolutions (evolutionsTree) {
             pokemonList[index].variants[pokemonList[index].variants.length -1].imgVariantIndex //imgVariantIndex of the last variant of the pokemon
             :
             index;
+            axios
+            .get('https://pokeapi.co/api/v2/pokemon/' + spriteNumber)
+            .then((response) => {
             variantEvolutionsTree.push({
                                         evolutionIndex: index,
                                         names: evolutionNames,
-                                        spriteSrc: spriteImgURLTemplate + spriteNumber + imgSuffixTemplate,
+                                        spriteSrc: response.data.sprites['front_default'],
                                         isOutOfRange: index > pokemonList.length -1
-                                        }
-            );
+                                        });
+            });
           });
 
           variant.evolutionsIndex.forEach((index) => { //foreach pokemon of the evolution tree (assignation of the evolution tree)
@@ -631,22 +637,28 @@ function BuildPokemonEvolutions (evolutionsTree) {
           evolutionsTree.forEach((index) => {
             //if this is THE variant
             if (index <= pokemonList.length -1 && index == parseInt(pokemon.number)) {
+              axios
+              .get('https://pokeapi.co/api/v2/pokemon/' + pokemonList[index].variants[0].imgVariantIndex)
+              .then((response) => {
               variant.evolutions.push({
                                       evolutionIndex: index,
                                       names: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].names,
-                                      spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
+                                      spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : response.data.sprites['front_default'],
                                       isOutOfRange: index > pokemonList.length -1
-                                      }
-              );
+                                      });
+              });
             } else {
+              axios
+              .get('https://pokeapi.co/api/v2/pokemon/' + index)
+              .then((response) => {
               variant.evolutions.push({
                                       evolutionIndex: index,
                                       names: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].names,
-                                      spriteSrc: spriteImgURLTemplate + index + imgSuffixTemplate,
+                                      spriteSrc: response.data.sprites['front_default'],
                                       isOutOfRange: index > pokemonList.length -1
-                                      }
-                );
-              }
+                                      });
+              });
+            }
 
           });
 
@@ -654,13 +666,16 @@ function BuildPokemonEvolutions (evolutionsTree) {
           variant.evolutions.actual = pokemon.evolutions.actual;
 
           evolutionsTree.forEach((index) => {
+            axios
+            .get('https://pokeapi.co/api/v2/pokemon/' + pokemonList[index].variants[0].imgVariantIndex)
+            .then((response) => {
             variant.evolutions.push({
                                     evolutionIndex: index,
                                     names: (index > pokemonList.length -1) ? errorsDefinitions['missingRegionalPokemon'] : pokemonList[index].variants[0].names,
-                                    spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : spriteImgURLTemplate + pokemonList[index].variants[0].imgVariantIndex + imgSuffixTemplate,
+                                    spriteSrc: index > pokemonList.length -1 ? errorsDefinitions['missingRegionalPokemon'] : response.data.sprites['front_default'],
                                     isOutOfRange: index > pokemonList.length -1
-                                    }
-            );
+                                    });
+            });
           });
         }
 

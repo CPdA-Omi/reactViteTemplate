@@ -2,12 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import './Types.css'
 
-import { pokemonList } from './PokedexData.jsx'
+import { pokemonList, regionalFormsNumber } from './PokedexData.jsx'
 
-import SettingsMenu from './components/SettingsMenu.jsx'
-import PokemonCard from './components/PokemonCard.jsx'
-import NavBar from './components/NavBar.jsx'
 import PokeLoad from './components/PokeLoad.jsx'
+import StatsDisplay from './components/StatsDisplay.jsx'
+import PokemonCard from './components/PokemonCard.jsx'
+import SettingsMenu from './components/SettingsMenu.jsx'
+import NavBar from './components/NavBar.jsx'
 
 const defaultPokemonDisplayed = 1;
 const languages = ['EN', 'FR', 'DE', 'JA'];
@@ -70,19 +71,24 @@ function App() {
     setPokemonIndex(defaultPokemonDisplayed);
     setTimeout(() => {
       setIsLoading(false);
-    }, pokemonList.length * 20);
+    }, pokemonList.length * 30);
   },[]);
 
   return (
-    <div className="mainDisplay">
+    <>
       {isLoading ?
         <PokeLoad />
       :
       <>
+        <StatsDisplay
+        pokemonListLength={pokemonList.length}
+        regionalFormsNumber={regionalFormsNumber}
+        languagesSet={languages.length}
+        />
         <div className="topNav">
           <NavBar
           pokemonIndex={pokemonIndex}
-          pokemonList={pokemonList}
+          pokemonListLength={pokemonList.length}
           handleClickDecrement={handleClickDecrement}
           handleClickIncrement={handleClickIncrement}
           handleClickIndex={handleClickIndex}
@@ -102,7 +108,7 @@ function App() {
         />
       </>
       }
-    </div>
+    </>
   );
 }
 

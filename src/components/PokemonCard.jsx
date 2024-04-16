@@ -4,7 +4,9 @@ function PokemonCard({
 	pokemonVariant, handleClickVariant	
 }){
 
+	const breakNumberOfVariants = 4;
 	let currentPokemon = '';
+
 	if (parseInt(pokemonVariant) === -1){
 		currentPokemon = pokemon;
 	} else {
@@ -15,7 +17,7 @@ function PokemonCard({
 		<article className={'pokemonCard ' + currentPokemon.types[0] + 'Type'}>
 
 			<section className="pokemonCardTopNavigation">
-				{pokemon.variants && pokemon.variants.length < 3 ?
+				{pokemon.variants && pokemon.variants.length < breakNumberOfVariants ?
 				<div className="pokemonRegionalVariantsSelector">
 					<img onClick={() => handleClickVariant(-1)}
 						title={pokemon.names[language].charAt(0).toUpperCase() + pokemon.names[language].slice(1)}
@@ -27,7 +29,7 @@ function PokemonCard({
 						src={variant.imgSrc.sprites.frontDefault} alt={variant.names['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 					))}
 				</div>
-				: pokemon.variants && pokemon.variants.length >= 3 ?
+				: pokemon.variants && pokemon.variants.length >= breakNumberOfVariants ?
 					<div className="tooMuchVariantsSelector">
 						<select onChange={e => handleClickVariant(e.target.value)}
 						name="tooMuchVariantsSelector" id="too-Much-Variants-Selector">
@@ -91,6 +93,30 @@ function PokemonCard({
 										language === 'JA' ? 'もっと見る' :
 										language === 'KO' ? '추가 정보' :
 										'See more') + '...'}</summary>
+				<h2>{pokemon.genera[language]}</h2>
+
+				<section className="pokemonCriesSection">
+					<strong className="sectionTitle">{language === 'FR' ? 'Cris' :
+													language === 'DE' ? 'Geschrei' :
+													language === 'JA' ? '悲鳴を上げる' :
+													'Cries'}</strong>
+					{currentPokemon.sndSrc.latest && currentPokemon.sndSrc.latest !== null ?
+					<figure>
+						<figcaption>Latest:</figcaption>
+						<audio controls src={currentPokemon.sndSrc.latest}></audio>
+					</figure>
+					:
+					<></>}
+
+					{currentPokemon.sndSrc.legacy && currentPokemon.sndSrc.legacy !== null ?
+					<figure>
+						<figcaption>First:</figcaption>
+						<audio controls src={currentPokemon.sndSrc.legacy}></audio>
+					</figure>
+					:
+					<></>}
+				</section>
+
 				{currentPokemon.imgSrc.artworkShiny && currentPokemon.imgSrc.artworkShiny !== null ?
 				<section className="pokemonShinySection">
 					<strong className="sectionTitle">{language === 'FR' ? 'Chromatique' :

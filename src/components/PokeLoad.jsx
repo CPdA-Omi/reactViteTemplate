@@ -2,7 +2,8 @@ function PokeLoad({
 }){
 	return (
 		<section className="pokeballLoading">
-			<h1>Loading...</h1>
+			<h1>Welcome to Omicro's Pokedex</h1>
+			<h2>Loading...</h2>
 	    	<div className="pokeball">
 	    	</div>
 	    </section>

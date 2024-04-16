@@ -7,6 +7,7 @@ const spriteBackImgURLTemplate = spriteImgURLTemplate + "back/"
 const typeImgURLTemplate = apiURL + "types/generation-viii/legends-arceus/"
 const imgSuffixTemplate = ".png"
 
+export let regionalFormsNumber = 0;
 
 //errors definitions dictionnary
 export const errorsDefinitions = {
@@ -400,6 +401,69 @@ export const pokemonList = [
 
 /*0200*/  {evolutionsIndex: [200, 429]},
 /*0201*/  {},
+/*0202*/  {evolutionsIndex: [360, 202]},
+/*0203*/  {evolutionsIndex: [203, 981]},
+/*0204*/  {evolutionsIndex: [204, 205]},
+/*0205*/  {},
+/*0206*/  {evolutionsIndex: [206, 982]},
+/*0207*/  {evolutionsIndex: [207, 472]},
+/*0208*/  {},
+/*0209*/  {evolutionsIndex: [209, 210]},
+/*0210*/  {},
+
+/*0211*/  {variants: [
+                  {imgVariantIndex: 10234, regionName: 'hisui', evolutionsIndex: [215, 904]}
+              ]},
+
+/*0212*/  {},
+/*0213*/  {},
+/*0214*/  {},
+
+/*0215*/  {evolutionsIndex: [215, 461],
+          variants: [
+                  {imgVariantIndex: 10235, regionName: 'hisui', evolutionsIndex: [215, 903]}
+              ]},
+
+/*0216*/  {evolutionsIndex: [216, 217, 901]},
+/*0217*/  {},
+/*0218*/  {evolutionsIndex: [218, 219]},
+/*0219*/  {},
+/*0220*/  {evolutionsIndex: [220, 221, 473]},
+/*0221*/  {},
+
+/*0222*/  {variants: [
+                  {imgVariantIndex: 10173, regionName: 'galar', evolutionsIndex: [222, 864]}
+                ]},
+
+/*0223*/  {evolutionsIndex: [223, 224]},
+/*0224*/  {},
+/*0225*/  {},
+/*0226*/  {evolutionsIndex: [458, 226]},
+/*0227*/  {},
+/*0228*/  {evolutionsIndex: [228, 229]},
+/*0229*/  {},
+/*0230*/  {},
+/*0231*/  {evolutionsIndex: [231, 232]},
+/*0232*/  {},
+/*0233*/  {},
+/*0234*/  {evolutionsIndex: [234, 899]},
+/*0235*/  {},
+/*0236*/  {},
+/*0237*/  {},
+/*0238*/  {},
+/*0239*/  {},
+/*0240*/  {},
+/*0241*/  {},
+/*0242*/  {},
+/*0243*/  {},
+/*0244*/  {},
+/*0245*/  {},
+/*0246*/  {evolutionsIndex: [246, 247, 248]},
+/*0247*/  {},
+/*0248*/  {},
+/*0249*/  {},
+/*0250*/  {},
+/*0251*/  {},
 ];
 
 /*===================================================================================================*/
@@ -506,6 +570,7 @@ function BuildPokemonImages (pokemon) {
 
   if (pokemonList.indexOf(pokemon) === 0){
     pokemon.imgSrc.artwork = "https://wiki.p-insurgence.com/images/0/09/722.png";
+    pokemon.imgSrc.sprites.frontDefault = spriteImgURLTemplate + '0' + imgSuffixTemplate;
     
     pokemon.imgSrc.types = [];
     pokemon.types.forEach((t) => {
@@ -685,6 +750,46 @@ function BuildPokemonEvolutions (evolutionsTree) {
   });
 }//BuildPokemonEvolutions
 
+function BuildPokemonDetails (pokemon) {
+  if (parseInt(pokemon.number) !== 0) {
+    axios
+      .get('https://pokeapi.co/api/v2/pokemon-species/' + parseInt(pokemon.number))
+      .then((response) => {
+        const generaShortcut = response.data.genera;
+        pokemon.genera = {
+                          KO: generaShortcut[1].genus,
+                          CH: generaShortcut[2].genus,
+                          FR: generaShortcut[3].genus,
+                          DE: generaShortcut[4].genus,
+                          ES: generaShortcut[5].genus,
+                          IT: generaShortcut[6].genus,
+                          EN: generaShortcut[7].genus,
+                          JA: generaShortcut[8].genus,
+                        };
+    });
+    axios
+      .get('https://pokeapi.co/api/v2/pokemon/' + parseInt(pokemon.number))
+      .then((response) => {
+        pokemon.sndSrc = response.data.cries;
+    });
+
+    if (pokemon.variants) {
+      pokemon.variants.forEach((v) => {
+        axios
+        .get('https://pokeapi.co/api/v2/pokemon/' + v.imgVariantIndex)
+        .then((response) => {
+          v.sndSrc = response.data.cries;
+        delete v.imgVariantIndex;
+        });
+      });
+    }
+  }
+}
+
+/*===================================================================================================*/
+/*===================================================================================================*/
+/*===================================================================================================*/
+
 function BuildUnown () {
   if (pokemonList.length -1 >= 201){
     const unown = pokemonList[201];
@@ -725,6 +830,10 @@ function BuildUnown () {
   }
 }
 
+/*===================================================================================================*/
+/*===================================================================================================*/
+/*===================================================================================================*/
+
 function SetupPokemonList (pokemonList) {
   pokemonList.forEach((pokemon, index) => {
 
@@ -762,7 +871,11 @@ function BuildPokemonList (pokemonList) {
 
     if (pokemon.variants){
       BuildPokemonVariants(pokemon);
+      regionalFormsNumber += pokemon.variants.length;
     }
+
+    BuildPokemonDetails(pokemon);
+
   });
 }
 

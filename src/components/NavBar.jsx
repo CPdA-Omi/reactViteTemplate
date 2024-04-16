@@ -1,5 +1,5 @@
 function NavBar({
-	pokemonIndex, pokemonList,
+	pokemonIndex, pokemonListLength,
 	handleClickDecrement, handleClickIncrement, handleClickIndex,
 	language, handleClickLanguageSwitch
 }){
@@ -17,15 +17,20 @@ function NavBar({
 				:
 				<button disabled>{'<'}</button>}
 
-				<p>{pokemonIndex + '/' + (pokemonList.length-1).toString()}</p>
+				<p>
+				<input type="number"
+				onChange={e => handleClickIndex(e.target.value)}
+				value={pokemonIndex}
+				min="1" max={pokemonListLength -1}/>
+				{'/ ' + (pokemonListLength-1).toString()}</p>
 
-				{pokemonIndex < pokemonList.length -1 ?
+				{pokemonIndex < pokemonListLength -1 ?
 				<button accessKey="n" onClick={handleClickIncrement}>{'>'}</button>
 				:
 				<button disabled>{'>'}</button>}
 
-				{pokemonIndex < pokemonList.length -2 ?
-				<button onClick={() => handleClickIndex(pokemonList.length -1)}>{'>>'}</button>
+				{pokemonIndex < pokemonListLength -2 ?
+				<button onClick={() => handleClickIndex(pokemonListLength -1)}>{'>>'}</button>
 				:
 				<button disabled>{'>>'}</button>}
 			</div>

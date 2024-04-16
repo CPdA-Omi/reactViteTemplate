@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import './Types.css'
 
-import { pokemonList } from './PokedexData.js'
+import { pokemonList } from './PokedexData.jsx'
 
 import SettingsMenu from './components/SettingsMenu.jsx'
 import PokemonCard from './components/PokemonCard.jsx'

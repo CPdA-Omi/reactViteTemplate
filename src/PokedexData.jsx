@@ -56,13 +56,6 @@ const regionalFormsNames = {
   'paldea':  {EN: 'paldean',  FR: 'de Paldea',  JA: 'パルデアン'},
 };
 
-
-//index of pokemonList which have a variant due to the pokemon gender
-const pokemonGenderVariants = [
-  3, 12, 20, 25, 26, 41, 42, 44, 45, 64, 65, 84, 85, 97, 111, 112, 118, 119, 123, 129, 130,
-  154, 165, 166, 178, 185, 186, 190, 194, 195, 198, 202, 203, 207, 208, 212, 214, 215, 217, 221, 224, 229, 232
-];
-
 //evolutions order have to be in crescent evolutions order
 export const pokemonList = [
 /*0000*/  {},
@@ -451,7 +444,7 @@ function SetPokemonNames (pokemon) {
         pokemon.names['JA'] = response.data.names[9].name;
         pokemon.names['roomaji'] = response.data.names[1].name;
 
-        if (pokemon.variants){
+        if (pokemon.variants && parseInt(pokemon.number) !== 201){
           pokemon.variants.forEach((v) => {
             v.names['EN'] = regionalFormsNames[v.regionName]['EN'] + ' ' + pokemon.names['EN'].charAt(0).toUpperCase() + pokemon.names['EN'].slice(1);
             v.names['FR'] = pokemon.names['FR'] + ' ' + regionalFormsNames[v.regionName]['FR'];
@@ -465,7 +458,7 @@ function SetPokemonNames (pokemon) {
   }
 }
 
-function SetPokemonTypes (pokemon) {
+function SetupPokemonTypes (pokemon) {
   if (pokemonList.indexOf(pokemon) === 0){
     pokemon.types = ['flying', 'normal'];
   } else {
@@ -490,7 +483,6 @@ function SetPokemonTypes (pokemon) {
                 response.data.types.forEach((t) => {
                   v.types.push(t.type.name);
                   v.imgSrc.types.push(typeImgURLTemplate + pokemonTypes.indexOf(t.type.name) + imgSuffixTemplate);
-                  delete v.imgVariantIndex;
                 });
               });
           });
@@ -511,47 +503,62 @@ function SetPokemonTypes (pokemon) {
 
 function BuildPokemonImages (pokemon) {
   const pokemonNumber = parseInt(pokemon.number);
-  pokemon.imgSrc = {sprites: {}};
 
   if (pokemonList.indexOf(pokemon) === 0){
     pokemon.imgSrc.artwork = "https://wiki.p-insurgence.com/images/0/09/722.png";
     
     pokemon.imgSrc.types = [];
-    pokemon.types.forEach((type) => {
-      pokemon.imgSrc.types.push(typeImgURLTemplate + pokemonTypes.indexOf(type) + imgSuffixTemplate);
+    pokemon.types.forEach((t) => {
+      pokemon.imgSrc.types.push(typeImgURLTemplate + pokemonTypes.indexOf(t) + imgSuffixTemplate);
     });
-    
+
   } else {
-    pokemon.imgSrc.artwork = mainImgURLTemplate + pokemonNumber + imgSuffixTemplate;
-    pokemon.imgSrc.shinyArtwork = mainImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
-  }
+    axios
+      .get('https://pokeapi.co/api/v2/pokemon/' + parseInt(pokemon.number))
+      .then((response) => {
+        const imagesShortcut = response.data.sprites;
+        pokemon.imgSrc.artwork =        imagesShortcut.other['official-artwork']['front_default'];
+        pokemon.imgSrc.artworkShiny =   imagesShortcut.other['official-artwork']['front_shiny'];
+        pokemon.imgSrc.sprites = {
+                                  frontDefault:  imagesShortcut['front_default'],
+                                  frontShiny:    imagesShortcut['front_shiny'],
+                                  backDefault:   imagesShortcut['back_default'],
+                                  backShiny:     imagesShortcut['back_shiny'],
 
-  pokemon.imgSrc.sprites.regular = spriteImgURLTemplate + pokemonNumber + imgSuffixTemplate;
-  pokemon.imgSrc.sprites.regularBack = spriteBackImgURLTemplate + pokemonNumber + imgSuffixTemplate;
-  pokemon.imgSrc.sprites.shiny = spriteImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
-  pokemon.imgSrc.sprites.shinyBack = spriteBackImgURLTemplate + 'shiny/' + pokemonNumber + imgSuffixTemplate;
+                                  frontFemale:         imagesShortcut['front_female'],
+                                  frontShinyFemale:    imagesShortcut['front_shiny_female'],
+                                  backFemale:          imagesShortcut['back_female'],
+                                  backShinyFemale:     imagesShortcut['back_shiny_female']
+                                  };
 
-  if (pokemonGenderVariants.includes(pokemonNumber)){
-    pokemon.imgSrc.sprites.regularFemale = spriteImgURLTemplate + 'female/' + pokemonNumber + imgSuffixTemplate;
-    pokemon.imgSrc.sprites.regularBackFemale = spriteBackImgURLTemplate + 'female/' + pokemonNumber + imgSuffixTemplate;
-    pokemon.imgSrc.sprites.shinyFemale = spriteImgURLTemplate + 'shiny/female/' + pokemonNumber + imgSuffixTemplate;
-    pokemon.imgSrc.sprites.shinyBackFemale = spriteBackImgURLTemplate + 'shiny/female/' + pokemonNumber + imgSuffixTemplate;
+    });
   }
 }
 
 function BuildPokemonVariants (pokemon) {
-  pokemon.variants.forEach((variant) => {
-    variant.number = pokemon.number;
+  pokemon.variants.forEach((v) => {
+    v.number = pokemon.number;
 
-    variant.imgSrc = {sprites: {}};
-    variant.imgSrc.artwork = mainImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
-    variant.imgSrc.sprites.regular = spriteImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
-    variant.imgSrc.sprites.regularBack = spriteBackImgURLTemplate + variant.imgVariantIndex + imgSuffixTemplate;
+    v.imgSrc = {sprites: {}};
 
-    if (pokemonGenderVariants.includes(variant.number)){
-      variant.imgSrc.sprites.regularFemale = spriteImgURLTemplate + 'female/' + variant.imgVariantIndex + imgSuffixTemplate;
-      variant.imgSrc.sprites.regularBackFemale = spriteBackImgURLTemplate + 'female/' + variant.imgVariantIndex + imgSuffixTemplate;
-    }
+    axios
+      .get('https://pokeapi.co/api/v2/pokemon/' + parseInt(v.imgVariantIndex))
+      .then((response) => {
+        const imagesShortcut = response.data.sprites;
+        v.imgSrc.artwork =        imagesShortcut.other['official-artwork']['front_default'];
+        v.imgSrc.artworkShiny =   imagesShortcut.other['official-artwork']['front_shiny'];
+        v.imgSrc.sprites = {
+                            frontDefault: imagesShortcut['front_default'],
+                            frontShiny:   imagesShortcut['front_shiny'],
+                            backDefault:  imagesShortcut['back_default'],
+                            backShiny:    imagesShortcut['back_shiny'],
+
+                            frontFemale:        imagesShortcut['front_female'],
+                            frontShinyFemale:   imagesShortcut['front_shiny_female'],
+                            backFemale:         imagesShortcut['back_female'],
+                            backShinyFemale:    imagesShortcut['back_shiny_female']
+                            };
+    });
   });
 }
 
@@ -691,10 +698,10 @@ function BuildUnown () {
                                 roomaji: 'Unknown ' + shape},
                             number: unown.number,
                             imgSrc: {artwork: 'https://img.pokemondb.net/artwork/vector/large/unown-' + c + imgSuffixTemplate,
-                                    sprites: {regular: spriteImgURLTemplate + '201-' + c + imgSuffixTemplate,
-                                              regularBack: spriteBackImgURLTemplate + '201-' + c + imgSuffixTemplate,
-                                              shiny: spriteImgURLTemplate + 'shiny/201-' + c + imgSuffixTemplate,
-                                              shinyBack: spriteBackImgURLTemplate + 'shiny/201-' + c + imgSuffixTemplate
+                                    sprites: {frontDefault: spriteImgURLTemplate + '201-' + c + imgSuffixTemplate,
+                                              backDefault:  spriteBackImgURLTemplate + '201-' + c + imgSuffixTemplate,
+                                              frontShiny:   spriteImgURLTemplate + 'shiny/201-' + c + imgSuffixTemplate,
+                                              backShiny:    spriteBackImgURLTemplate + 'shiny/201-' + c + imgSuffixTemplate
                                             },
                                     },
                           }
@@ -724,7 +731,7 @@ function SetupPokemonList (pokemonList) {
     }
 
     SetPokemonNames(pokemon);
-    SetPokemonTypes(pokemon);
+    SetupPokemonTypes(pokemon);
 
   });
 }

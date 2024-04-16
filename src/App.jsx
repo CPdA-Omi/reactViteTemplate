@@ -7,6 +7,7 @@ import { pokemonList } from './PokedexData.jsx'
 import SettingsMenu from './components/SettingsMenu.jsx'
 import PokemonCard from './components/PokemonCard.jsx'
 import NavBar from './components/NavBar.jsx'
+import PokeLoad from './components/PokeLoad.jsx'
 
 const defaultPokemonDisplayed = 1;
 const languages = ['EN', 'FR', 'DE', 'JA'];
@@ -62,40 +63,46 @@ function App() {
     setPokemonIndex(index);
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useState(() => {
+    setIsLoading(true);
     setPokemonIndex(defaultPokemonDisplayed);
-    }
-  );
+    setTimeout(() => {
+      setIsLoading(false);
+    }, pokemonList.length * 20);
+  },[]);
 
   return (
-    <>
-      <div className="topNav">
-        <NavBar
-        pokemonIndex={pokemonIndex}
-        pokemonList={pokemonList}
-        handleClickDecrement={handleClickDecrement}
-        handleClickIncrement={handleClickIncrement}
-        handleClickIndex={handleClickIndex}
-        />
+    <div className="mainDisplay">
+      {isLoading ?
+        <PokeLoad />
+      :
+      <>
+        <div className="topNav">
+          <NavBar
+          pokemonIndex={pokemonIndex}
+          pokemonList={pokemonList}
+          handleClickDecrement={handleClickDecrement}
+          handleClickIncrement={handleClickIncrement}
+          handleClickIndex={handleClickIndex}
+          />
 
-        <SettingsMenu
+          <SettingsMenu
+          language={language}
+          handleClickLanguageSwitch={handleClickLanguageSwitch}
+          />
+        </div>
+        <PokemonCard
+        pokemon={pokemonList[pokemonIndex]}
         language={language}
-        handleClickLanguageSwitch={handleClickLanguageSwitch}
+        handleClickIndex={handleClickIndex}
+        pokemonVariant={pokemonVariant}
+        handleClickVariant={handleClickVariant}
         />
-      </div>
-
-      {pokemonList[defaultPokemonDisplayed].names !== undefined &&
-        pokemonList[defaultPokemonDisplayed].types !== undefined ?
-      <PokemonCard
-      pokemon={pokemonList[pokemonIndex]}
-      language={language}
-      handleClickIndex={handleClickIndex}
-      pokemonVariant={pokemonVariant}
-      handleClickVariant={handleClickVariant}
-      />
-      :''
+      </>
       }
-    </>
+    </div>
   );
 }
 

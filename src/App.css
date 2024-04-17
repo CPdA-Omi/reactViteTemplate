@@ -1,9 +1,15 @@
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
   --greyBackground: rgba(25, 25, 25, 0.5);
+}
+
+.statsDisplay summary:hover,
+.pokemonDetailedDescription summary:hover,
+.pokemonVariantsSelector img.clickableImage:hover,
+.pokemonEvolutionsSelector img.clickableImage:hover {
+  cursor: pointer;
 }
 
 /*=============================================*/
@@ -86,10 +92,6 @@ section.statsDisplay {
   border-radius: 5px;
 }
 
-.statsDisplay summary:hover {
-  cursor: pointer;
-}
-
 .statsDisplay details[open] {
   background: var(--greyBackground);
   border-radius: 10px;
@@ -170,20 +172,20 @@ strong.sectionTitle {
   margin: 0;
 }
 
-.pokemonRegionalVariantsSelector {
+.pokemonVariantsSelector {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   margin-left: 10px;
 }
 
-.pokemonRegionalVariantsSelector img:hover,
-.pokemonEvolutionsSelector img.clickableImage:hover {
-  cursor: pointer;
+.pokemonVariantsSelector img {
+  height: 60px;
+  width: 60px;
 }
 
-.pokemonRegionalVariantsSelector img {
-  height: 60px;
+.pokemonVariantsSelector img:not(.currentForm) {
+  margin-left: 10px;
 }
 
 .tooMuchVariantsSelector {
@@ -205,12 +207,19 @@ strong.sectionTitle {
   display: flex;
   border-radius: 0 0 5px 5px;
   max-width: 60%;
-  margin: 10px 10px 0 0;
+  margin-right: 10px;
+  height: 106px;
   overflow-x: auto;
 }
 
+.pokemonVariantsSelector img,
 .pokemonEvolutionsSelector img {
   max-height: 96px;
+  transition: 0.2s;
+}
+
+.pokemonEvolutionsSelector img:not(.currentEvolution) {
+  margin-top: 10px;
 }
 
 
@@ -275,10 +284,6 @@ strong.sectionTitle {
 
 .pokemonDetailedDescription summary {
   font-weight: bold;
-}
-
-.pokemonDetailedDescription summary:hover {
-  cursor: pointer;
 }
 
 .pokemonDetailedDescription>section {

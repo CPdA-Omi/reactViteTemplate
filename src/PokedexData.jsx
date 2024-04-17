@@ -411,8 +411,9 @@ export const pokemonList = [
 /*0209*/  {evolutionsIndex: [209, 210]},
 /*0210*/  {},
 
-/*0211*/  {variants: [
-                  {imgVariantIndex: 10234, regionName: 'hisui', evolutionsIndex: [215, 904]}
+/*0211*/  {evolutionsIndex: [211],
+          variants: [
+                  {imgVariantIndex: 10234, regionName: 'hisui', evolutionsIndex: [211, 904]}
               ]},
 
 /*0212*/  {},
@@ -431,7 +432,8 @@ export const pokemonList = [
 /*0220*/  {evolutionsIndex: [220, 221, 473]},
 /*0221*/  {},
 
-/*0222*/  {variants: [
+/*0222*/  {evolutionsIndex: [222],
+          variants: [
                   {imgVariantIndex: 10173, regionName: 'galar', evolutionsIndex: [222, 864]}
                 ]},
 

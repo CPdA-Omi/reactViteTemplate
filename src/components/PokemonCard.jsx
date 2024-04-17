@@ -18,14 +18,16 @@ function PokemonCard({
 
 			<section className="pokemonCardTopNavigation">
 				{pokemon.variants && pokemon.variants.length < breakNumberOfVariants ?
-				<div className="pokemonRegionalVariantsSelector">
+				<div className="pokemonVariantsSelector">
 					<img onClick={() => handleClickVariant(-1)}
 						title={pokemon.names[language].charAt(0).toUpperCase() + pokemon.names[language].slice(1)}
+						className={pokemon.names === currentPokemon.names ? 'currentForm' : 'clickableImage'}
 						src={pokemon.imgSrc.sprites.frontDefault} alt={pokemon.names['EN'].toLowerCase() + 'Sprite'}/>
 					{pokemon.variants.map((variant) => (
-						<img key={pokemon.names[language].toLowerCase() + 'RegionalVariant' + pokemon.variants.indexOf(variant)}
+						<img key={pokemon.names[language].toLowerCase() + 'RegionalForm' + pokemon.variants.indexOf(variant)}
 						onClick={() => handleClickVariant(pokemon.variants.indexOf(variant))}
 						title={variant.names[language].charAt(0).toUpperCase() + variant.names[language].slice(1)}
+						className={variant.names === currentPokemon.names ? 'currentForm' : 'clickableImage'}
 						src={variant.imgSrc.sprites.frontDefault} alt={variant.names['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 					))}
 				</div>
@@ -52,7 +54,8 @@ function PokemonCard({
 							<img key={evolution.spriteSrc + 'Evolution'/*have to be replaced later by "names[language].toLowerCase()"*/}
 							onClick={() => handleClickIndex(evolution.isOutOfRange ? undefined : evolution.evolutionIndex)}
 							title={evolution.names[language].charAt(0).toUpperCase() + evolution.names[language].slice(1)}
-							className="clickableImage"
+							className={evolution.names === currentPokemon.names ? 'currentEvolution' :
+										evolution.isOutOfRange ? '' : 'clickableImage'}
 							src={evolution.spriteSrc} alt={evolution.names['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 						))}
 					</>

@@ -95,6 +95,10 @@ section.statsDisplay {
   border-radius: 10px;
 }
 
+.statsDisplay details[open] summary {
+  padding: 10px;
+}
+
 .statsDisplay ul {
   list-style: none;
   margin: 10px 20px 10px -20px;

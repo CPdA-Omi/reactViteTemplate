@@ -95,6 +95,7 @@ function PokemonCard({
 										'See more') + '...'}</summary>
 				<h2>{pokemon.genera[language]}</h2>
 
+				{currentPokemon.sndSrc ?
 				<section className="pokemonCriesSection">
 					<strong className="sectionTitle">{language === 'FR' ? 'Cris' :
 													language === 'DE' ? 'Geschrei' :
@@ -116,6 +117,8 @@ function PokemonCard({
 					:
 					<></>}
 				</section>
+				:
+				<></>}
 
 				{currentPokemon.imgSrc.artworkShiny && currentPokemon.imgSrc.artworkShiny !== null ?
 				<section className="pokemonShinySection">

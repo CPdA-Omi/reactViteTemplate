@@ -64,10 +64,9 @@ function App() {
     setPokemonIndex(index);
   }
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useState(() => {
-    setIsLoading(true);
     setPokemonIndex(defaultPokemonDisplayed);
     setTimeout(() => {
       setIsLoading(false);

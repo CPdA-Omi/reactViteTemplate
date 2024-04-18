@@ -146,10 +146,22 @@ strong.sectionTitle {
 .pokemonCardNavigation input {
   border: unset;
   background: unset;
-  margin: 0 10px 0 0;
-  font-size: 105%;
-  width: 60px;
+  text-align: right;
+  margin: 0;
+  font-size: 102%;
+  width: 40px;
   height: 100%;
+}
+
+.pokemonCardNavigation input::-webkit-outer-spin-button,
+.pokemonCardNavigation input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.pokemonCardNavigation input[type=number] {
+  -moz-appearance: textfield;
 }
 
 

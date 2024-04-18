@@ -643,18 +643,22 @@ function BuildPokemonEvolutions (evolutionsTree) {
     if (pokemon.evolutionsIndex){
       delete pokemon.evolutionsIndex;
     }
+    
     pokemon.evolutions = [];
+    evolutionsTree.forEach((i) => {
+      pokemon.evolutions.push({});
+    });
       
       evolutionsTree.forEach((index) => {
         axios
         .get('https://pokeapi.co/api/v2/pokemon/' + index)
         .then((response) => {
-        pokemon.evolutions.push({
-                                evolutionIndex: index,
-                                names: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].names,
-                                spriteSrc: response.data.sprites['front_default'],
-                                isOutOfRange: index > pokemonList.length -1
-                                });
+        pokemon.evolutions[evolutionsTree.indexOf(index)] = {
+                                                              evolutionIndex: index,
+                                                              names: (index > pokemonList.length -1) ? errorsDefinitions['missingPokemon'] : pokemonList[index].names,
+                                                              spriteSrc: response.data.sprites['front_default'],
+                                                              isOutOfRange: index > pokemonList.length -1
+                                                              };
         });
       });
 

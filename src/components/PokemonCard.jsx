@@ -48,20 +48,21 @@ function PokemonCard({
 				<div className="placeHolderDivBecauseThereIsNoRegionalVariantsHere"></div>
 				}
 				<div className="pokemonEvolutionsSelector">
-					{currentPokemon.evolutions ?
+					{currentPokemon.evolutions && currentPokemon.evolutions.length !== 1 ?
 					<>
 						{currentPokemon.evolutions.map((evolution) => (
 							<img key={evolution.spriteSrc + 'Evolution'/*have to be replaced later by "names[language].toLowerCase()"*/}
 							onClick={() => handleClickIndex(evolution.isOutOfRange ? undefined : evolution.evolutionIndex)}
 							title={evolution.names[language].charAt(0).toUpperCase() + evolution.names[language].slice(1)}
 							className={evolution.names === currentPokemon.names ? 'currentEvolution' :
-										evolution.isOutOfRange ? '' : 'clickableImage'}
+										evolution.isOutOfRange ? 'outOfRangeEvolution' : 'clickableImage'}
 							src={evolution.spriteSrc} alt={evolution.names['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
 						))}
 					</>
 					:
 					<>
 						<img title={currentPokemon.names[language].charAt(0).toUpperCase() + currentPokemon.names[language].slice(1)}
+						className="singleEvolution"
 						src={currentPokemon.imgSrc.sprites.frontDefault} alt={currentPokemon.names['EN'].toLowerCase() + 'Sprite'}/>
 					</>
 					}
@@ -75,7 +76,7 @@ function PokemonCard({
 			<div className="pokemonDescription">
 				{language === 'JA' ?
 				<p className="pokemonRoomajiName">{currentPokemon.names['roomaji'].charAt(0).toUpperCase() + currentPokemon.names['roomaji'].slice(1)}</p>
-				: ''}
+				: <></>}
 				<p className="pokemonName">{currentPokemon.names[language].charAt(0).toUpperCase() + currentPokemon.names[language].slice(1)}</p>
 				<p className="pokemonNumber">{(language === 'FR' ? 'n°' : language === 'DE' ? 'Nr. ' : '#') + pokemon.number}</p>
 				<div className="pokemonDescriptionTypesList">
@@ -146,53 +147,53 @@ function PokemonCard({
 					<div>
 						<div>
  							{currentPokemon.imgSrc.sprites.frontDefault && currentPokemon.imgSrc.sprites.frontDefault !== null ?
-							<img title={language === 'FR' ? 'Sprite normal' : 'Regular Sprite'}
+							<img title={language === 'FR' ? 'Sprite normal de face' : 'Front Sprite'}
 							src={currentPokemon.imgSrc.sprites.frontDefault}
-							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'Sprite'}/>
+							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FrontSprite'}/>
 							:<></>}
 
 							{currentPokemon.imgSrc.sprites.backDefault && currentPokemon.imgSrc.sprites.backDefault !== null ?
-							<img title={language === 'FR' ? 'Sprite normal de dos': 'Regular Back Sprite'}
+							<img title={language === 'FR' ? 'Sprite normal de dos': 'Front Back Sprite'}
 							src={currentPokemon.imgSrc.sprites.backDefault} 
 							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'BackSprite'}/>
 							:<></>}
 
 							{currentPokemon.imgSrc.sprites.frontShiny && currentPokemon.imgSrc.sprites.frontShiny !== null ?
-							<img title={language === 'FR' ? 'Sprite chromatique' : 'Shiny Sprite'}
+							<img title={language === 'FR' ? 'Sprite chromatique de face' : 'Front Shiny Sprite'}
 							src={currentPokemon.imgSrc.sprites.frontShiny}
-							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'ShinySprite'}/>
+							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FrontShinySprite'}/>
 							:<></>}
 
 							{currentPokemon.imgSrc.sprites.backShiny && currentPokemon.imgSrc.sprites.backShiny !== null ?
-							<img title={language === 'FR' ? 'Sprite chromatique de dos' : 'Shiny Back Sprite'}
+							<img title={language === 'FR' ? 'Sprite chromatique de dos' : 'Back Shiny Sprite'}
 							src={currentPokemon.imgSrc.sprites.backShiny}
-							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'ShinyBackSprite'}/>
+							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'BackShinySprite'}/>
 							:<></>}
 						</div>
 						
 						<div>
 							{currentPokemon.imgSrc.sprites.frontFemale && currentPokemon.imgSrc.sprites.frontFemale !== null ?
-							<img title={language === 'FR' ? 'Sprite femelle' : 'Female Sprite'}
+							<img title={language === 'FR' ? 'Sprite femelle de face' : 'Front Female Sprite'}
 							src={currentPokemon.imgSrc.sprites.frontFemale}
-							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FemaleSprite'}/>
+							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FrontFemaleSprite'}/>
 							:<></>}
 
 							{currentPokemon.imgSrc.sprites.backFemale && currentPokemon.imgSrc.sprites.backFemale !== null ?
-							<img title={language === 'FR' ? 'Sprite femelle de dos' : 'Female Back Sprite'}
+							<img title={language === 'FR' ? 'Sprite femelle de dos' : 'Back Female Sprite'}
 							src={currentPokemon.imgSrc.sprites.backFemale}
-							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FemaleBackSprite'}/>
+							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'BackFemaleSprite'}/>
 							:<></>}
 
 							{currentPokemon.imgSrc.sprites.frontShinyFemale && currentPokemon.imgSrc.sprites.frontShinyFemale !== null ?
-							<img title={language === 'FR' ? 'Sprite femelle chromatique' : 'Female Shiny Sprite'}
+							<img title={language === 'FR' ? 'Sprite femelle chromatique de face' : 'Front Female Shiny Sprite'}
 							src={currentPokemon.imgSrc.sprites.frontShinyFemale}
-							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FemaleShinySprite'}/>
+							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FrontFemaleShinySprite'}/>
 							:<></>}
 
 							{currentPokemon.imgSrc.sprites.backShinyFemale && currentPokemon.imgSrc.sprites.backShinyFemale !== null ?
-							<img title={language === 'FR' ? 'Sprite femelle chromatique de dos' : 'Female Shiny Back Sprite'}
+							<img title={language === 'FR' ? 'Sprite femelle chromatique de dos' : 'Back Female Shiny Sprite'}
 							src={currentPokemon.imgSrc.sprites.backShinyFemale}
-							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'FemaleShinyBackSprite'}/>
+							alt={currentPokemon.names['EN'].toLowerCase().replace(/\s/g, '') + 'BackFemaleShinySprite'}/>
 							:<></>}
 						</div>
 						

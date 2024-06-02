@@ -1,0 +1,25 @@
+{
+  "alola":   {
+              "EN": "alolan",   
+              "FR": "d'Alola",   
+              "JA": "アローラ"
+            },
+
+  "galar":   {
+              "EN": "galarian", 
+              "FR": "de Galar",   
+              "JA": "ガラリアン"
+            },
+
+  "hisui":   {
+              "EN": "hisuian",  
+              "FR": "de Husui",   
+              "JA": "ヒスイアン"
+            },
+
+  "paldea":  {
+              "EN": "paldean",  
+              "FR": "de Paldea",  
+              "JA": "パルデアン"
+            }
+}

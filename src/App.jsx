@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import './Types.css'
 
-import { pokemonList, regionalFormsNumber } from './PokedexData.jsx'
+import { pokemonList, regionalFormsNumber } from './scripts/PokedexData.jsx'
 
 import PokeLoad from './components/PokeLoad.jsx'
 import StatsDisplay from './components/StatsDisplay.jsx'
@@ -66,11 +66,11 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useState(() => {
+  useEffect(() => {
     setPokemonIndex(defaultPokemonDisplayed);
     setTimeout(() => {
       setIsLoading(false);
-    }, pokemonList.length * 30);
+    }, pokemonList.length * 40);
   },[]);
 
   return (
@@ -79,11 +79,11 @@ function App() {
         <PokeLoad />
       :
       <>
-        <StatsDisplay
+        {/*<StatsDisplay
         pokemonListLength={pokemonList.length}
         regionalFormsNumber={regionalFormsNumber}
         languagesSet={languages.length}
-        />
+        />*/}
         <div className="topNav">
           <NavBar
           pokemonIndex={pokemonIndex}

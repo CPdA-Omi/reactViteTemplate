@@ -218,7 +218,7 @@ strong.sectionTitle {
 .pokemonEvolutionsSelector {
   display: flex;
   border-radius: 0 0 5px 5px;
-  max-width: 60%;
+  max-width: 80%;
   margin-right: 10px;
   height: 106px;
   overflow-x: auto;
@@ -230,7 +230,9 @@ strong.sectionTitle {
   transition: 0.2s;
 }
 
-.pokemonEvolutionsSelector img:not(.currentEvolution) {
+.pokemonEvolutionsSelector img.outOfRangeEvolution,
+.pokemonEvolutionsSelector img.clickableImage,
+.pokemonEvolutionsSelector img.singleEvolution {
   margin-top: 10px;
 }
 

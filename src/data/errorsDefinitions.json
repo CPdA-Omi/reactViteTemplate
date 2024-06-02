@@ -1,0 +1,14 @@
+{
+  "missingPokemon": {
+                      "EN": "Pokémon not implemented yet",
+                      "FR": "Pokémon pas encore implémenté",
+                      "DE": "Pokémon noch nicht implementiert",
+                      "JA": "まだ実装されてないポケモン"
+                      },
+  "missingRegionalPokemon": {
+                      "EN": "Regional variant not implemented yet",
+                      "FR": "Variante régionale pas encore implémentée",
+                      "DE": "Regionale Variante nicht zusätzlich implementiert",
+                      "JA": "地域バリアントはまだ実装されていません"
+                      }
+}
